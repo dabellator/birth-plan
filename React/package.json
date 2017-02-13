@@ -54,8 +54,12 @@
     "stylus-loader": "^2.4.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "npm run watch:styles & npm run watch:scripts",
+    "build": "npm run build:styles & npm run build:scripts",
+    "build:scripts": "node scripts/build.js",
+    "watch:scripts": "node scripts/start.js",
+    "build:styles": "stylus src/index.styl",
+    "watch:styles": "npm run build:styles -- --watch --sourcemap",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
