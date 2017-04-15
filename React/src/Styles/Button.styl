@@ -1,0 +1,41 @@
+setSize(size)
+  font-size size
+  padding size
+
+.button
+  display inline-flex
+  cursor pointer
+  padding $baseFontSize
+  font-size $baseFontSize
+  border-radius 2em
+  &[disabled]
+    cursor not-allowed!important
+
+.xs
+  setSize xs
+
+.sm
+  setSize sm
+
+.md
+  setSize md
+
+.lg
+  setSize lg
+
+.xl
+  setSize xl
+
+.primary
+  background-color transparent
+  border 1px solid $primary
+  color $primary
+  &:hover, &[disabled]
+    background-color lighten($primary, 90%)
+
+.secondary
+  background-color $primary
+  border 1px solid alpha($primary, .5)
+  color $white
+  &:hover, &[disabled]
+    background-color lighten($primary, 10%)

@@ -1,0 +1,30 @@
+.input-dropdown
+  cursor pointer
+  padding-bottom .5em
+  border-bottom 1px solid lighten($main-font, 20%)
+  color darken($main-font, 50%)
+  font-size md
+
+  .input-dropdown-label
+    display block
+    margin-bottom .3em
+    font-size xs
+    color $primary
+    top -10px
+
+  ul
+    margin 0
+    padding 0
+
+  &:focus
+    outline none
+    .input-dropdown-option
+      display block
+
+.input-dropdown-option
+  display none
+  list-style none
+  &:hover
+    background blue
+  &.selected
+    color blue

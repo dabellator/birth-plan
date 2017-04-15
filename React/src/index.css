@@ -1,6 +1,415 @@
-body {
+html,
+body,
+#app {
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0px;
+  padding: 0px;
+}
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+.App {
+  height: 100vh;
+  width: 100vw;
+  background: #f2fffc;
+  font-family: Raleway, 'sans-serif';
+  color: #60757f;
+}
+.button {
+  display: inline-flex;
+  cursor: pointer;
+  padding: 1em;
+  font-size: 1em;
+  border-radius: 2em;
+}
+.button[disabled] {
+  cursor: not-allowed !important;
+}
+.xs {
+  font-size: 0.7em;
+  padding: 0.7em;
+}
+.sm {
+  font-size: 0.85em;
+  padding: 0.85em;
+}
+.md {
+  font-size: 1em;
+  padding: 1em;
+}
+.lg {
+  font-size: 1.15em;
+  padding: 1.15em;
+}
+.xl {
+  font-size: 1.3em;
+  padding: 1.3em;
+}
+.primary {
+  background-color: transparent;
+  border: 1px solid #43bfa5;
+  color: #43bfa5;
+}
+.primary:hover,
+.primary[disabled] {
+  background-color: #ecf9f6;
+}
+.secondary {
+  background-color: #43bfa5;
+  border: 1px solid rgba(67,191,165,0.5);
+  color: #fff;
+}
+.secondary:hover,
+.secondary[disabled] {
+  background-color: #56c5ae;
+}
+.input-dropdown {
+  cursor: pointer;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #7c929c;
+  color: #303a40;
+  font-size: 1em;
+}
+.input-dropdown .input-dropdown-label {
+  display: block;
+  margin-bottom: 0.3em;
+  font-size: 0.7em;
+  color: #43bfa5;
+  top: -10px;
+}
+.input-dropdown ul {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+.input-dropdown:focus {
+  outline: none;
+}
+.input-dropdown:focus .input-dropdown-option {
+  display: block;
+}
+.input-dropdown-option {
+  display: none;
+  list-style: none;
+}
+.input-dropdown-option:hover {
+  background: #00f;
+}
+.input-dropdown-option.selected {
+  color: #00f;
+}
+.row {
+  float: left;
+  position: relative;
+  width: 100%;
+}
+.col-1 {
+  width: 8.333333333333334%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-1.center {
+  text-align: center !important;
+}
+.col-1.right {
+  text-align: right !important;
+}
+.col-1.middle {
+  margin: auto !important;
+}
+.col-2 {
+  width: 16.666666666666668%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-2.center {
+  text-align: center !important;
+}
+.col-2.right {
+  text-align: right !important;
+}
+.col-2.middle {
+  margin: auto !important;
+}
+.col-3 {
+  width: 25%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-3.center {
+  text-align: center !important;
+}
+.col-3.right {
+  text-align: right !important;
+}
+.col-3.middle {
+  margin: auto !important;
+}
+.col-4 {
+  width: 33.333333333333336%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-4.center {
+  text-align: center !important;
+}
+.col-4.right {
+  text-align: right !important;
+}
+.col-4.middle {
+  margin: auto !important;
+}
+.col-5 {
+  width: 41.66666666666667%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-5.center {
+  text-align: center !important;
+}
+.col-5.right {
+  text-align: right !important;
+}
+.col-5.middle {
+  margin: auto !important;
+}
+.col-6 {
+  width: 50%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-6.center {
+  text-align: center !important;
+}
+.col-6.right {
+  text-align: right !important;
+}
+.col-6.middle {
+  margin: auto !important;
+}
+.col-7 {
+  width: 58.333333333333336%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-7.center {
+  text-align: center !important;
+}
+.col-7.right {
+  text-align: right !important;
+}
+.col-7.middle {
+  margin: auto !important;
+}
+.col-8 {
+  width: 66.66666666666667%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-8.center {
+  text-align: center !important;
+}
+.col-8.right {
+  text-align: right !important;
+}
+.col-8.middle {
+  margin: auto !important;
+}
+.col-9 {
+  width: 75%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-9.center {
+  text-align: center !important;
+}
+.col-9.right {
+  text-align: right !important;
+}
+.col-9.middle {
+  margin: auto !important;
+}
+.col-10 {
+  width: 83.33333333333334%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-10.center {
+  text-align: center !important;
+}
+.col-10.right {
+  text-align: right !important;
+}
+.col-10.middle {
+  margin: auto !important;
+}
+.col-11 {
+  width: 91.66666666666667%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-11.center {
+  text-align: center !important;
+}
+.col-11.right {
+  text-align: right !important;
+}
+.col-11.middle {
+  margin: auto !important;
+}
+.col-12 {
+  width: 100%;
+  box-sizing: border-box;
+  float: left;
+  padding: 0.7em;
+}
+.col-12.center {
+  text-align: center !important;
+}
+.col-12.right {
+  text-align: right !important;
+}
+.col-12.middle {
+  margin: auto !important;
+}
+@media screen and (max-width: 800px) {
+  .col-1 {
+    width: 50%;
+  }
+  .col-2 {
+    width: 50%;
+  }
+  .col-3 {
+    width: 50%;
+  }
+  .col-4 {
+    width: 100%;
+  }
+  .col-5 {
+    width: 100%;
+  }
+  .col-6 {
+    width: 100%;
+  }
+  .col-7 {
+    width: 100%;
+  }
+  .col-8 {
+    width: 100%;
+  }
+  .col-9 {
+    width: 100%;
+  }
+  .col-10 {
+    width: 100%;
+  }
+  .col-11 {
+    width: 100%;
+  }
+  .col-12 {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .col-1 {
+    width: 100%;
+  }
+  .col-2 {
+    width: 100%;
+  }
+  .col-3 {
+    width: 100%;
+  }
+}
+.icon {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  color: #000;
+  pointer-events: none;
+}
+.icon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+}
+.input-container {
+  width: 100%;
+  color: #7c929c;
+  position: relative;
+}
+.input-container input {
+  color: #303a40;
+  font-family: Raleway, 'sans-serif';
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  width: 100%;
+  font-size: 1em;
+  height: 35px;
+  border: none;
+  border-bottom: 1px solid #7c929c;
+  display: block;
+}
+.input-container input:focus {
+  outline: none;
+}
+.input-container label {
+  font-size: 1em;
+  display: block;
+  position: absolute;
+  top: 9px;
+  left: 1px;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.input-container .text-input:focus ~ label,
+.input-container .label.has-text {
+  font-size: 0.7em;
+  color: #43bfa5;
+  top: -10px;
+}
+.input-container .text-input:focus+.underline {
+  transform: scale(1);
+}
+.input-container .underline {
+  position: relative;
+  display: block;
+  margin-top: -1px;
+  height: 2px;
+  width: 100%;
+  background-color: #43bfa5;
+  -webkit-transform: scale(0, 1);
+  transform: scale(0, 1);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 /*# sourceMappingURL=src/index.css.map */
