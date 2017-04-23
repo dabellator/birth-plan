@@ -1,0 +1,25 @@
+.input-dropdown
+  position relative
+  width 100%
+  cursor pointer
+  font-size $md
+
+  .input-dropdown-label
+    position absolute
+    color $main-font-light
+    font-size $xs
+    top -10px
+    &.is-active
+      color $primary
+
+  .input-dropdown-text
+    height 35px
+    padding-top 8px
+    border-bottom 1px solid $main-font-light
+    &.placeholder
+      color $main-font-lighter
+    &:focus,
+      outline none
+
+    .icon
+      float right

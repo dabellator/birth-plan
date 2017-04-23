@@ -2,40 +2,49 @@ setSize(size)
   font-size size
   padding size
 
-.button
-  display inline-flex
-  cursor pointer
-  padding $baseFontSize
-  font-size $baseFontSize
-  border-radius 2em
-  &[disabled]
-    cursor not-allowed!important
+.button-wrapper
+  &:focus
+    outline none
 
-.xs
-  setSize xs
+  .button
+    display inline-flex
+    cursor pointer
+    padding $baseFontSize
+    font-size $baseFontSize
+    border-radius 2em
+    min-width 5em
+    .btn-text
+      margin auto
+    &[disabled]
+      cursor not-allowed!important
 
-.sm
-  setSize sm
+  .xs
+    setSize $xs
 
-.md
-  setSize md
+  .sm
+    setSize $sm
 
-.lg
-  setSize lg
+  .md
+    setSize $md
 
-.xl
-  setSize xl
+  .lg
+    setSize $lg
 
-.primary
-  background-color transparent
-  border 1px solid $primary
-  color $primary
-  &:hover, &[disabled]
-    background-color lighten($primary, 90%)
+  .xl
+    setSize $xl
 
-.secondary
-  background-color $primary
-  border 1px solid alpha($primary, .5)
-  color $white
-  &:hover, &[disabled]
-    background-color lighten($primary, 10%)
+  .primary
+    background-color transparent
+    border 1px solid $primary
+    color $primary
+    &.active,
+    &[disabled]
+      background-color lighten($primary, 90%)
+
+  .secondary
+    background-color $primary
+    border 1px solid alpha($primary, .5)
+    color $white
+    &.active,
+    &[disabled]
+      background-color lighten($primary, 10%)

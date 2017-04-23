@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
+import { combineClasses } from '../Services/Common';
 
 export default class Input extends Component {
   render() {
-    const { type, inputStyle, onChange, onFocus, onBlur, disabled, value, label, inputContainerStyle } = this.props;
-    const inputClass = value && value.length ? "has-text" : "";
+    const { type, error, inputStyle, onChange, onFocus, onBlur, disabled, value, label, inputContainerStyle, placeholder, floatingLabel } = this.props;
+    const inputError = error ? 'error' : ''
+    const floatLabel = (value && value.length) || placeholder || floatingLabel ? "floating-label" : "";
+    const inputLabelClass = combineClasses( 'label', floatLabel, inputError );
+    const inputClass = combineClasses('text-input', inputError);
+    const underlineClass = combineClasses( 'underline', inputError );
     return (
       <div className="input-container" style={inputContainerStyle}>
         <input
-          type={type === "password" ? "password" : "text"}
+          className={inputClass}
+          type={type || "text"}
           style={inputStyle}
-          className="text-input"
+          placeholder={placeholder}
           onChange={onChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -17,8 +23,8 @@ export default class Input extends Component {
           value={value}
         >
         </input>
-        <span className="underline"></span>
-        <label className={`label ${inputClass}`}>{label}</label>
+        <span className={underlineClass}></span>
+        <label className={inputLabelClass}>{label}</label>
       </div>
     )
   }

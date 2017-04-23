@@ -1,0 +1,26 @@
+.dropdown-container
+  position absolute
+  z-index 10000
+  &.full-width
+    width 100%
+
+  .dropdown-wrapper
+    background $white
+    position relative
+    margin 0
+    padding 0
+    &:focus
+      outline none
+    &.hide
+      -webkit-transition: max-height .4s ease;
+      max-height 0px
+      overflow hidden
+    &.show
+      -webkit-transition: max-height .4s ease;
+      height auto
+      max-height 10em
+      overflow hidden
+      overflow-y scroll
+
+&:focus
+  outline none

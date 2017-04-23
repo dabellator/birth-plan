@@ -1,20 +1,25 @@
-$main-font = #60757F
-$main-background = #F2FFFC
 $primary = #43bfa5
+$main-font = #303a40
+$main-font-light = lighten($main-font, 30%)
+$main-font-lighter = lighten($main-font, 60%)
+$main-font-lightest = lighten($primary, 95%)
 $white = #fff
 $black = black
+$error = #FF4B38
 
 $baseFontSize = 1em
 
-xs = $baseFontSize * .7;
-sm = $baseFontSize * .85;
-md = $baseFontSize
-lg = $baseFontSize * 1.15;
-xl = $baseFontSize * 1.3;
+$xs = $baseFontSize * .8;
+$sm = $baseFontSize * .9;
+$md = $baseFontSize
+$lg = $baseFontSize * 1.1;
+$xl = $baseFontSize * 1.2;
 
-media-small = 30em; // 480px
-media-medium = 48em; // 768px
-media-large = 64em; //1024px
-media-xlarge = 90em; //1440px
+$media-small = 30em; // 480px
+$media-medium = 48em; // 768px
+$media-large = 64em; //1024px
+$media-xlarge = 90em; //1440px
+
+$box-shadow = $main-font-lighter 0px 1px 6px, $main-font-lighter 0px 1px 4px;
 
 @import url('https://fonts.googleapis.com/css?family=Raleway')
