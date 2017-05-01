@@ -6,11 +6,11 @@ import Shadow from './Shadow';
 export default class DropdownMenu extends Component {
 
   render() {
-    const { handleMouseClick, onChange, options, showDropdown, active, value, onMouseOver, fullWidth } = this.props;
+    const { handleMouseClick, onChange, options, showDropdown, active, value, onMouseOver, fullWidth, containerStyle } = this.props;
     const showDropdownClass = combineClasses('dropdown-wrapper', showDropdown ? 'show' : 'hide')
     const containerClass = combineClasses('dropdown-container', fullWidth ? 'full-width' : '')
     return (
-      <div className={containerClass}>
+      <div style={containerStyle} className={containerClass}>
         <Shadow>
             <div className={showDropdownClass} tabIndex='-1'>
               {options.map((option, index) => {

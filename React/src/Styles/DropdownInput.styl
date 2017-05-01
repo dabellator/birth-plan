@@ -3,12 +3,15 @@
   width 100%
   cursor pointer
   font-size $md
+  height 72px
 
   .input-dropdown-label
+    width inherit
     position absolute
+    height 15px
+    top 0
     color $main-font-light
     font-size $xs
-    top -10px
     &.is-active
       color $primary
 
@@ -16,6 +19,9 @@
     height 35px
     padding-top 8px
     border-bottom 1px solid $main-font-light
+    position absolute
+    width inherit
+    top 15px
     &.placeholder
       color $main-font-lighter
     &:focus,

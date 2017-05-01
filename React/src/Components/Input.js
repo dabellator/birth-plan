@@ -3,7 +3,7 @@ import { combineClasses } from '../Services/Common';
 
 export default class Input extends Component {
   render() {
-    const { type, error, inputStyle, onChange, onFocus, onBlur, disabled, value, label, inputContainerStyle, placeholder, floatingLabel } = this.props;
+    const { type, error, inputStyle, onChange, onFocus, onBlur, disabled, value, label, inputContainerStyle, placeholder, floatingLabel, errorMessage } = this.props;
     const inputError = error ? 'error' : ''
     const floatLabel = (value && value.length) || placeholder || floatingLabel ? "floating-label" : "";
     const inputLabelClass = combineClasses( 'label', floatLabel, inputError );
@@ -24,6 +24,7 @@ export default class Input extends Component {
         >
         </input>
         <span className={underlineClass}></span>
+        <div className={"error-message"}>{errorMessage}</div>
         <label className={inputLabelClass}>{label}</label>
       </div>
     )

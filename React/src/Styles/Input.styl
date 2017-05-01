@@ -1,9 +1,20 @@
 .input-container
   width 100%
   position relative
+  height 72px
+
+  .error-message
+    width inherit
+    position: absolute;
+    bottom: 3px;
+    font-size: 12px;
+    color $error
+
   input
     font-family Raleway, 'sans-serif'
     padding 0
+    position absolute
+    top 15px
     margin 0
     background transparent
     width 100%
@@ -20,35 +31,33 @@
       color $main-font-lighter
 
   label
+    width inherit
+    height 15px
     color $main-font-light
     font-size $md
     display block
     position: absolute;
-    top: 9px;
+    top 25px;
     left: 1px;
     pointer-events none
     transition 0.2s ease all
     -moz-transition 0.2s ease all
     -webkit-transition 0.2s ease all
-    &.error
-      color $error !important
 
   .text-input:focus ~ label,
   .label.floating-label
     font-size $xs
-    top -10px
+    top 0;
   .text-input:focus ~ label
     color $primary
-    &.error
-      color $error !important
 
   .text-input:focus+.underline
     transform scale(1)
 
   .underline
-    position relative
+    position absolute
+    top 49px
     display block
-    margin-top -1px
     height 2px
     width 100%
     background-color $primary
