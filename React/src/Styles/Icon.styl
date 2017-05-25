@@ -1,11 +1,25 @@
-.icon
+setRotation(rotation)
+  -ms-transform rotate(rotation)
+  -webkit-transform rotate(rotation)
+  transform rotate(rotation)
+
+
+span.icon
   position relative
   display inline-block
   width 20px
   height 20px
   background transparent
-  color $main-font
-  pointer-events none
+  padding $xs
+  &[orientation = 'up']
+    setRotation(180deg)
+  &[orientation = 'left']
+    setRotation(90deg)
+  &[orientation = 'right']
+    setRotation(270deg)
+
+  &.button
+    cursor pointer
 
   svg
     position absolute

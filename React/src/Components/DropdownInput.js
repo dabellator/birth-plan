@@ -85,7 +85,7 @@ export default class DropdownInput extends Component {
     const { onChange, handleMouseClick, onKeyDown, onBlur, onFocus, toggleDropdown, onMouseOver } = this;
     const { options, label, value, placeholder, fullWidth } = this.props;
     const { active, showDropdown } = this.state;
-    const wrapperClasses = combineClasses( 'input-dropdown' );
+    const wrapperClasses = combineClasses( 'input input-dropdown' );
     const textClasses = combineClasses( 'input-dropdown-text', placeholder && !value ? 'placeholder' : '' )
     const labelClasses = combineClasses( 'input-dropdown-label', showDropdown ? 'is-active' : '')
     let textValue = placeholder && !value ? placeholder : value;

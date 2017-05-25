@@ -1,16 +1,40 @@
 import React, { Component } from 'react';
 import { combineClasses } from '../Services/Common';
+import Validation from '../Services/Validation';
 
 export default class Input extends Component {
   render() {
-    const { type, error, inputStyle, onChange, onFocus, onBlur, disabled, value, label, inputContainerStyle, placeholder, floatingLabel, errorMessage } = this.props;
-    const inputError = error ? 'error' : ''
+    const {
+      type,
+      inputStyle,
+      onChange,
+      onFocus,
+      onBlur,
+      disabled,
+      value,
+      label,
+      inputContainerStyle,
+      placeholder,
+      floatingLabel,
+      validationPattern
+    } = this.props;
+
     const floatLabel = (value && value.length) || placeholder || floatingLabel ? "floating-label" : "";
-    const inputLabelClass = combineClasses( 'label', floatLabel, inputError );
-    const inputClass = combineClasses('text-input', inputError);
-    const underlineClass = combineClasses( 'underline', inputError );
+    let validationObj = {
+      isValid: true,
+      message: ''
+    };
+    if (validationPattern && value.length) {
+      const validation = Validation[validationPattern];
+      validationObj = validation(value);
+    }
+    const errorClass = validationObj.isValid ? '' : 'error';
+    const inputLabelClass = combineClasses( 'label', floatLabel, errorClass );
+    const inputClass = combineClasses( 'text-input', errorClass );
+    const underlineClass = combineClasses( 'underline', errorClass );
+
     return (
-      <div className="input-container" style={inputContainerStyle}>
+      <div className="input input-container" style={inputContainerStyle}>
         <input
           className={inputClass}
           type={type || "text"}
@@ -24,7 +48,7 @@ export default class Input extends Component {
         >
         </input>
         <span className={underlineClass}></span>
-        <div className={"error-message"}>{errorMessage}</div>
+        {validationObj.isValid ?  null : <div className={"error-message"}>{validationObj.message}</div>}
         <label className={inputLabelClass}>{label}</label>
       </div>
     )

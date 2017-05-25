@@ -1,9 +1,16 @@
 base = (100/12)
 
 .row
+  display flex
   float left
   position relative
   width 100%
+  &.center
+    text-align center
+  &.right
+    text-align right
+  &.left
+    text-align left
 
 for i in 1..12
   .col-{i}
