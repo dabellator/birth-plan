@@ -34,7 +34,7 @@ export default class LoginForm extends Component {
     const { userName, password } = this.state;
     return (
       <div className="login-form-wrapper">
-        <div className="section">
+        <div className="section sub-header">
           <div className="row center">
             <div className="col-12">Log in to your account</div>
           </div>

@@ -167,11 +167,9 @@
 }
 .form-header.top {
   border-bottom: 1px solid #e8ecee;
-  margin-bottom: 0.9em;
 }
 .form-header.bottom {
   border-top: 1px solid #e8ecee;
-  margin-top: 0.9em;
 }
 .row {
   display: flex;
@@ -559,14 +557,17 @@ span.icon svg {
 .login-form-wrapper .section {
   width: 100%;
 }
+.login-form-wrapper .sub-header {
+  padding-top: 0.8em;
+}
 .login-form-wrapper .link {
   line-height: 2em;
-  margin-left: 0.5em;
-  margin-right: 0.5em;
+  margin-left: 0.8em;
+  margin-right: 0.8em;
 }
 .login-form-wrapper .forgot-password {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
 }
 .menu-item {
   background: #fff;
