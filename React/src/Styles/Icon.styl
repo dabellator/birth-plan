@@ -1,0 +1,30 @@
+setRotation(rotation)
+  -ms-transform rotate(rotation)
+  -webkit-transform rotate(rotation)
+  transform rotate(rotation)
+
+
+span.icon
+  position relative
+  display inline-block
+  width 20px
+  height 20px
+  background transparent
+  padding $xs
+  &[orientation = 'up']
+    setRotation(180deg)
+  &[orientation = 'left']
+    setRotation(90deg)
+  &[orientation = 'right']
+    setRotation(270deg)
+
+  &.button
+    cursor pointer
+
+  svg
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    width 20px
+    height 20px

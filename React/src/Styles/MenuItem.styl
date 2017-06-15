@@ -1,0 +1,15 @@
+.menu-item
+  background $white
+  cursor pointer
+  padding $xs
+  display block
+  list-style none
+  height 45px
+  &.disabled
+    color $main-font-lighter
+    cursor not-allowed
+  &.active,
+  &:hover
+    background-color lighten($main-font, 85%)
+  &.selected
+    color $primary
