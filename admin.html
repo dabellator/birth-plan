@@ -16,26 +16,11 @@
       justify-content: center;
       flex-direction: column;
     }
-    #drop {
-      height: 200px;
-      width: 200px;
-      border-radius: 100px;
-      color: #fff;
-      background-color: #baf;
-      font-size: 20px;
-      display: flex;
-      align-items: center;
-    }
   </style>
 </head>
 <body>
   <div class="aligner">
-    <div id="drop">Drop files here.</div>
-    <div id="list">
-      <h1>Uploaded Files:</h1>
-    </div>
     <input type="file" onchange="handleFileUpload()" multiple><br>
-    <img src="" height="200" alt="Image preview...">
     <div id="imageList">
       <ul id="images">
       </ul>
@@ -195,7 +180,7 @@
     };
 
     function getImages() {
-      fetch(`${BPGRoutes}/data/bpg-test-images`, {
+      fetch(`${BPGRoutes}/data/BPG-Data-images-MVLLBSNLK1D4`, {
         method: "GET",
         mode: 'cors'
       }).then(function(res) {
@@ -217,7 +202,7 @@
         tags: data.tags || null
       };
 
-      fetch(`${BPGRoutes}/data/bpg-test-images/${id}`, {
+      fetch(`${BPGRoutes}/data/BPG-Data-images-MVLLBSNLK1D4/${id}`, {
         method: "PUT",
         headers: {
           'Content-Type': 'application/json'
@@ -225,8 +210,6 @@
         mode: 'cors',
         body: JSON.stringify(fileInfo)
       })
-
-      return console.log(id, fileInfo);
     }
 
     function randomID() {
@@ -243,49 +226,6 @@
       }
       return id;
     }
-
-    function handleDrop(e){
-      e.preventDefault();
-      var dt = e.dataTransfer;
-      var files = dt.files;
-      for (var i=0; i<files.length; i++) {
-        var file = files[i];
-        var reader = new FileReader();
-        reader.addEventListener('loadend', function(e){
-          fetch(apiBaseURL+"/requestUploadURL", {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              name: file.name,
-              type: file.type
-            })
-          })
-          .then(function(response){
-            return response.json();
-          })
-          .then(function(json){
-            return fetch(json.uploadURL, {
-              method: "PUT",
-              body: new Blob([reader.result], {type: file.type})
-            })
-          })
-          .then(function(){
-            var uploadedFileNode = document.createElement('div');
-            uploadedFileNode.innerHTML = '<a href="https://s3-us-west-2.amazonaws.com/bpgimages/'+ file.name +'">'+ file.name +'</a>';
-            list.appendChild(uploadedFileNode);
-          });
-        });
-        reader.readAsArrayBuffer(file);
-      }
-      return false;
-    }
-
-    // Tells the browser that we *can* drop on this target
-    drop.addEventListener('dragenter', cancel);
-    drop.addEventListener('dragover', cancel);
-    drop.addEventListener('drop', handleDrop);
 
     getImages();
   </script>
