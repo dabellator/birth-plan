@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>A File Upload Demo</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .aligner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    #drop {
+      height: 200px;
+      width: 200px;
+      border-radius: 100px;
+      color: #fff;
+      background-color: #baf;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="aligner">
+    <div id="drop">Drop files here.</div>
+    <div id="list">
+      <h1>Uploaded Files:</h1>
+    </div>
+    <input type="file" onchange="handleFileUpload()" multiple><br>
+    <img src="" height="200" alt="Image preview...">
+    <div id="imageList">
+      <ul id="images">
+      </ul>
+  </div>
+
+  <script type="text/javascript">
+    var drop = document.getElementById('drop');
+    var list = document.getElementById('list');
+    var images = document.getElementById('images');
+    var BPGRoutes = "https://e3hr1v9ebl.execute-api.us-west-2.amazonaws.com/prod";
+    var s3BucketURL = "https://s3-us-west-2.amazonaws.com/bpg-image-test";
+
+    function cancel(e) {
+      e.preventDefault();
+      return false;
+    }
+
+    function submitForm(id) {
+      var currentForm = document.getElementById(`form-${id}`).children;
+      var data = {};
+      var i;
+
+      for(i=0;i<currentForm.length;i++) {
+        if (currentForm[i].name) data[currentForm[i].name] = currentForm[i].value;
+      }
+
+      saveData(data, id);
+    }
+
+    function createForm(data) {
+      var dataForm = document.createElement('span')
+      dataForm.id = `form-${data.id}`;
+      var description = document.createElement('input');
+      var title = document.createElement('input');
+      var tags = document.createElement('input');
+      var related = document.createElement('input');
+      var name = document.createElement('input');
+
+      description.setAttribute('type', 'text');
+      description.setAttribute('name', `description`);
+      description.setAttribute('id', `description-${data.id}`);
+      description.setAttribute('value', data.description);
+      title.setAttribute('type', 'text');
+      title.setAttribute('name', `title`);
+      title.setAttribute('id', `title-${data.id}`);
+      title.setAttribute('value', data.title);
+      tags.setAttribute('type', 'text');
+      tags.setAttribute('name', `tags`);
+      tags.setAttribute('id', `tags-${data.id}`);
+      tags.setAttribute('value', data.tags);
+      related.setAttribute('type', 'text');
+      related.setAttribute('name', `related`);
+      related.setAttribute('id', `related-${data.id}`);
+      related.setAttribute('value', data.related);
+      name.setAttribute('name', 'name');
+      name.setAttribute('value', data.name);
+      name.setAttribute('id', `name-${data.id}`);
+
+      var descriptionLabel = document.createElement('label');
+      descriptionLabel.setAttribute('for', `description-${data.id}`);
+      descriptionLabel.innerHTML = 'Description';
+      var titleLabel = document.createElement('label');
+      titleLabel.setAttribute('for', `title-${data.id}`);
+      titleLabel.innerHTML = 'Title';
+      var tagsLabel = document.createElement('label');
+      tagsLabel.setAttribute('for', `tags-${data.id}`);
+      tagsLabel.innerHTML = 'Tags';
+      var relatedLabel = document.createElement('label');
+      relatedLabel.setAttribute('for', `related-${data.id}`);
+      relatedLabel.innerHTML = 'Related';
+      var nameLabel = document.createElement('label');
+      nameLabel.setAttribute('for', `name-${data.id}`);
+      nameLabel.innerHTML = 'Name';
+
+      var submitText = document.createTextNode('submit');
+      var submit = document.createElement('button');
+      submit.addEventListener('click', function() {
+        submitForm(data.id);
+      })
+      submit.appendChild(submitText);
+
+      dataForm.appendChild(nameLabel);
+      dataForm.appendChild(name);
+      dataForm.appendChild(descriptionLabel);
+      dataForm.appendChild(description);
+      dataForm.appendChild(titleLabel);
+      dataForm.appendChild(title);
+      dataForm.appendChild(relatedLabel);
+      dataForm.appendChild(related);
+      dataForm.appendChild(tagsLabel);
+      dataForm.appendChild(tags);
+
+      dataForm.appendChild(submit);
+
+      return dataForm;
+    }
+
+    function readFile(file, cb) {
+      var reader = new FileReader();
+
+      reader.addEventListener("load", function () {
+        cb(file, reader.result);
+      }, false);
+
+      reader.readAsDataURL(file);
+    }
+
+    function handleFileUpload() {
+      var files = document.querySelector('input[type=file]').files;
+
+      if (files) {
+        for (var i=0; i<files.length; i++) {
+          var file = files[i]
+          var fileURI = readFile(file, function(file, fileURI) {
+            previewFile(fileURI);
+            saveImage(file, fileURI);
+            saveData(file);
+          });
+        }
+      }
+    }
+
+    function previewFile(imageURL) {
+      var preview = document.querySelector('img');
+      preview.src = imageURL;
+    }
+
+    function saveImage(file, imageURL) {
+      fetch(`${BPGRoutes}/bpg-image-test`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify({
+          filename: file.name,
+          base64Image: imageURL,
+          type: file.type
+        })
+      })
+    }
+
+    function addToList(imageData) {
+      var imageListItem = document.createElement("li");
+      var titleSpan = document.createElement("span");
+      var imageSpan = document.createElement("span");
+      var titleContent = document.createTextNode(imageData.name);
+      var imageContent = new Image(50, 50);
+
+      imageContent.src = `${s3BucketURL}/${imageData.name}`;
+
+      imageListItem.appendChild(titleSpan).appendChild(titleContent);
+      imageListItem.appendChild(imageSpan).appendChild(imageContent);
+      imageListItem.appendChild(createForm(imageData));
+
+      images.appendChild(imageListItem);
+    };
+
+    function getImages() {
+      fetch(`${BPGRoutes}/data/bpg-test-images`, {
+        method: "GET",
+        mode: 'cors'
+      }).then(function(res) {
+        return res.json();
+      }).then(function(data) {
+        data.body.forEach(function(imageData) {
+          addToList(imageData);
+        });
+      });
+    };
+
+    function saveData(data, id) {
+      if (!id) id = randomID();
+      fileInfo = {
+        description: data.description || null,
+        title: data.title || null,
+        name: data.name || null,
+        related: data.related || null,
+        tags: data.tags || null
+      };
+
+      fetch(`${BPGRoutes}/data/bpg-test-images/${id}`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        mode: 'cors',
+        body: JSON.stringify(fileInfo)
+      })
+
+      return console.log(id, fileInfo);
+    }
+
+    function randomID() {
+      var letters = 'abcdefghijklmnopqrstuvxyz';
+      var numbers = '1234567890';
+      var sets = [letters, numbers];
+      var id = '';
+
+      for (i=0;i<12;i++) {
+        var set = sets[Math.floor(Math.random() * sets.length)];
+        var character = set[Math.floor(Math.random() * set.length)];
+        if (set.length === letters.length && Math.round(Math.random())) character = character.toUpperCase();
+        id = id.concat(character);
+      }
+      return id;
+    }
+
+    function handleDrop(e){
+      e.preventDefault();
+      var dt = e.dataTransfer;
+      var files = dt.files;
+      for (var i=0; i<files.length; i++) {
+        var file = files[i];
+        var reader = new FileReader();
+        reader.addEventListener('loadend', function(e){
+          fetch(apiBaseURL+"/requestUploadURL", {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: file.name,
+              type: file.type
+            })
+          })
+          .then(function(response){
+            return response.json();
+          })
+          .then(function(json){
+            return fetch(json.uploadURL, {
+              method: "PUT",
+              body: new Blob([reader.result], {type: file.type})
+            })
+          })
+          .then(function(){
+            var uploadedFileNode = document.createElement('div');
+            uploadedFileNode.innerHTML = '<a href="https://s3-us-west-2.amazonaws.com/bpgimages/'+ file.name +'">'+ file.name +'</a>';
+            list.appendChild(uploadedFileNode);
+          });
+        });
+        reader.readAsArrayBuffer(file);
+      }
+      return false;
+    }
+
+    // Tells the browser that we *can* drop on this target
+    drop.addEventListener('dragenter', cancel);
+    drop.addEventListener('dragover', cancel);
+    drop.addEventListener('drop', handleDrop);
+
+    getImages();
+  </script>
+</body>
+</html>

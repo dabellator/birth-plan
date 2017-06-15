@@ -12,15 +12,21 @@
 		<span>Name</span><input type="text" id="name-field">
 		<span>Description</span><input type="textarea" id="description-field">
 		<div id="images"></div>
-		<input type="button" id="button" value="Submit">
+		<input type="button" id="previewPlan" value="Submit">
+		<input type="text" id="birthPlanId">
+		<label for="birthPlanId">Enter Birth Plan ID</label>
+		<input type="button" id="fetchBirthPlan" value="Get Birth Plan">
 	</div>
-	<div id="header" class="hide">
-		<div id="info"><img src="images/logo-work4-01.png" /></div>
-		<div id="name"></div>
-		<div id="title">Birth Preferences</div>
+	<div id="selectedImageElement" class="hide">
+		<div id="header">
+			<div id="info"><img src="images/logo-work4-01.png" /></div>
+			<div id="name"></div>
+			<div id="title">Birth Preferences</div>
+			<div id="selectedImages"></div>
+		</div>
+		<div id="birth-plan"></div>
+		<input type="button" id="savePlan" value="Save">
 	</div>
-	<div id="birth-plan"></div>
-	<script src="data.js"></script>
 	<script src="client.js"></script>
 </body>
 </html>
