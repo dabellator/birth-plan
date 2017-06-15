@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import './App.css';
+import TestingPage from './Components/TestingPage';
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Birth Plan Generator</h2>
-        </div>
+        <TestingPage />
       </div>
-    );
+    )
   }
 }
 
