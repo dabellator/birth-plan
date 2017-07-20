@@ -93,7 +93,7 @@ export default class DropdownInput extends Component {
     return (
       <div className={wrapperClasses} tabIndex='0' onFocus={onFocus} onBlur={onBlur} onKeyDown={onKeyDown}>
         <label className={labelClasses}>{label}</label>
-        <div onMouseDown={toggleDropdown} className={textClasses}>{textValue}<Icon icon="Arrow" /></div>
+        <div onMouseDown={toggleDropdown} className={textClasses}>{textValue}<Icon orientation='down' icon="Arrow" /></div>
         <DropdownMenu
           containerStyle={{top: "50px"}}
           active={active}

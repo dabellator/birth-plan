@@ -1,57 +1,47 @@
 import React, { Component } from 'react';
+import TableHeader from './TableHeader';
+import TableBody from './TableBody';
+import TableRow from './TableRow';
+import TableHeaderColumn from './TableHeaderColumn';
+import TableBodyColumn from './TableBodyColumn';
 
 export default class Table extends Component {
 
   render() {
+    const { columns, data, textLeft, textCenter, textRight } = this.props;
     return (
       <div className="table-container">
         <table>
-          {this.props.children}
+          <TableHeader>
+            <TableRow>
+              {columns.map(column =>
+                <TableHeaderColumn
+                  value={column.title}
+                  tooltip={column.title}
+                  left={textLeft}
+                  center={textCenter}
+                  right={textRight}
+                />
+              )}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {data.map(item =>
+              <TableRow>
+                {columns.map(column =>
+                  <TableBodyColumn
+                    value={column.value(item) || column.placeholder || ''}
+                    tooltip={column.tooltip ? column.tooltip(item) : null}
+                    left={textLeft}
+                    center={textCenter}
+                    right={textRight}
+                  />
+                )}
+              </TableRow>
+            )}
+          </TableBody>
         </table>
       </div>
     )
   }
 }
-
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {}
-  //   this.renderRow = this.renderRow.bind(this);
-  //   this.renderColumn = this.renderColumn.bind(this);
-  // }
-  //
-  // renderColumn(numberOfRows, item, i) {
-  //   console.log("ITEM IN COLUMN", item)
-  //   return (
-  //     <div key={`table-column-${i}`} className="table-column">
-  //       {item}
-  //     </div>
-  //   )
-  // }
-  //
-  // renderRow(item, i) {
-  //   console.log("ITEM IN ROW", item)
-  //   const { renderColumn } = this;
-  //   const columns = Object.keys(item);
-  //   const numberOfRows = columns.length;
-  //   return (
-  //     <div key={`table-row-${i}`} className="table-row">
-  //       {columns.map(renderColumn.bind(null, numberOfRows))}
-  //     </div>
-  //   )
-  // }
-
-  // render() {
-  //   const { data, tableContainerClass, containerStyle } = this.props;
-  //   const { renderRow } = this;
-  //   const containerClass = combineClasses('table-container', tableContainerClass)
-  //   return (
-  //     <div style={{containerStyle}} className={containerClass}>
-  //       <Shadow>
-  //         {data.map(renderRow)}
-  //       </Shadow>
-  //     </div>
-  //   )
-  // }
-//
-// }

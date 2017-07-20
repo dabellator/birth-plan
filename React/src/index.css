@@ -52,6 +52,76 @@
   background-color: #637884;
   border: 1px solid rgba(99,120,132,0.5);
 }
+.checkbox-wrapper {
+  padding: 0 1em;
+  display: inline-flex;
+  align-items: flex-start;
+}
+.checkbox-wrapper.right {
+  flex-direction: row-reverse;
+}
+.checkbox-wrapper.right > span.checkbox {
+  margin-right: 0.5em;
+}
+.checkbox-wrapper.left {
+  flex-direction: row;
+}
+.checkbox-wrapper.left > span.checkbox {
+  margin-left: 0.5em;
+}
+.checkbox-wrapper.top {
+  flex-direction: column;
+}
+.checkbox-wrapper.top > span.checkbox {
+  margin-top: 0.5em;
+}
+.checkbox-wrapper.bottom {
+  flex-direction: column-reverse;
+}
+.checkbox-wrapper.bottom > span.checkbox {
+  margin-bottom: 0.5em;
+}
+.checkbox-wrapper .checkbox {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: text-top;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 2px;
+}
+.checkbox-wrapper .checkbox.checked {
+  background-color: #349a85;
+  border-color: #349a85;
+}
+.checkbox-wrapper .checkbox .checkmark {
+  position: absolute;
+  left: -2px;
+  top: -4px;
+  width: 22px;
+  height: 22px;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.checkbox-wrapper .checkbox .checkmark .checkmark_stem {
+  position: absolute;
+  width: 2px;
+  height: 13px;
+  background-color: #fff;
+  left: 13px;
+  top: 5px;
+}
+.checkbox-wrapper .checkbox .checkmark .checkmark_kick {
+  position: absolute;
+  width: 8px;
+  height: 2px;
+  background-color: #fff;
+  left: 7px;
+  top: 16px;
+}
 .input {
   width: 100%;
   position: relative;
@@ -84,7 +154,7 @@
   z-index: 1100;
   max-width: 650px;
   max-height: 500px;
-  overflow: scroll;
+  overflow: auto;
   background: #fff;
   -webkit-transition: all 1s ease;
   -moz-transition: all 1s ease;
@@ -683,7 +753,6 @@ tr.table-row {
   margin-bottom: 5px;
   margin-left: -25px;
   padding: 0.8em;
-  width: 100px;
   -webkit-border-radius: 0.2em;
   -moz-border-radius: 0.2em;
   border-radius: 0.2em;

@@ -2,13 +2,7 @@ import React, { Component } from 'react';
 import Button from './Button';
 import Input from './Input';
 import DropdownInput from './DropdownInput';
-import Shadow from './Shadow';
 import Table from './Table';
-import TableBody from './TableBody';
-import TableHeader from './TableHeader';
-import TableRow from './TableRow';
-import TableHeaderColumn from './TableHeaderColumn';
-import TableBodyColumn from './TableBodyColumn';
 import Checkbox from './Checkbox';
 import Icon from './Icon';
 import LoginForm from './LoginForm';
@@ -18,6 +12,23 @@ export default class TestingPage extends Component {
 
   static states = ['Washington', 'Oregon', 'California', 'Colorado']
   static people = ['Jordan', 'Travis', 'Andrea', 'Ana', 'Mike', 'Jesse', 'Derek', 'Ryan', 'Josh', 'Cole', 'Nick', 'Mark']
+  static tableData = [
+    {
+      name: 'Jordan',
+      age: 'Old',
+      gender: 'Female'
+    },
+    {
+      name: 'Travis',
+      age: '28',
+      gender: 'Male'
+    },
+    {
+      name: 'Andrea',
+      age: '29',
+      gender: 'Female'
+    }
+  ]
 
   constructor(props){
     super(props);
@@ -36,6 +47,12 @@ export default class TestingPage extends Component {
     this.updateDropdownItem = this.updateDropdownItem.bind(this);
     this.openDialog = this.openDialog.bind(this);
     this.signIn = this.signIn.bind(this);
+    this.getImages = this.getImages.bind(this);
+  }
+
+  getImages() {
+    const { fetchImages } = this.props;
+    fetchImages();
   }
 
   cancel() {
@@ -72,11 +89,32 @@ export default class TestingPage extends Component {
   }
 
   render() {
-    const { onChange, cancel, confirm, updateDropdownItem, openDialog, signIn } = this;
-    const { emailAddress, firstName, lastName, password, selectedState, selectedPerson, showDialog } = this.state
+    const { onChange, cancel, confirm, updateDropdownItem, openDialog, signIn, getImages } = this;
+    const { emailAddress, firstName, lastName, password, selectedState, selectedPerson, showDialog } = this.state;
+    const columns = [
+      {
+        title: 'Name',
+        value: item => item.name,
+        tooltip: item => item.name,
+        placeholder: 'N/A'
+      },
+      {
+        title: 'Age',
+        value: item => item.age,
+        tooltip: item => item.age,
+        placeholder: 'N/A'
+      },
+      {
+        title: 'Gender',
+        value: item => item.gender,
+        tooltip: item => item.gender,
+        placeholder: 'N/A'
+      }
+    ]
+    console.log("images? ", this.props.images)
     return (
       <div className="test-page-wrapper">
-        {/*<div className="row">
+        <div className="row">
           <div className="col-12">
             <h2>Birth Plan Generator</h2>
           </div>
@@ -146,80 +184,40 @@ export default class TestingPage extends Component {
               <Button onClick={cancel} buttonClassName="primary xs">Cancel</Button>
           </div>
           <div className="col-6 center">
-              <Button onClick={confirm} buttonClassName="secondary xs">Create</Button>
+              <Button onClick={getImages} buttonClassName="secondary xs">Get Images</Button>
           </div>
         </div>
         <div style={{marginTop: '1em', marginBottom: '1em'}} className="col-12">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHeaderColumn tooltip="header column 1">Column 1</TableHeaderColumn>
-                <TableHeaderColumn tooltip="header column 2">Column 2</TableHeaderColumn>
-                <TableHeaderColumn tooltip="header column 3">Column 3</TableHeaderColumn>
-                <TableHeaderColumn tooltip="header column 4">Column 4</TableHeaderColumn>
-                <TableHeaderColumn tooltip="header column 5">Column 5</TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableBodyColumn tooltip="body column 1, row 1">Row 1</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 2, row 1">Row 1</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 3, row 1">Row 1</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 4, row 1">Row 1</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 5, row 1">Row 1</TableBodyColumn>
-              </TableRow>
-              <TableRow>
-                <TableBodyColumn tooltip="body column 1, row 2">Row 2</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 2, row 2">Row 2</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 3, row 2">Row 2</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 4, row 2">Row 2</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 5, row 2">Row 2</TableBodyColumn>
-              </TableRow>
-              <TableRow>
-                <TableBodyColumn tooltip="body column 1, row 3">Row 3</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 2, row 3">Row 3</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 3, row 3">Row 3</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 4, row 3">Row 3</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 5, row 3">Row 3</TableBodyColumn>
-              </TableRow>
-              <TableRow>
-                <TableBodyColumn tooltip="body column 1, row 4">Row 4</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 2, row 4">Row 4</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 3, row 4">Row 4</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 4, row 4">Row 4</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 5, row 4">Row 4</TableBodyColumn>
-              </TableRow>
-              <TableRow>
-                <TableBodyColumn tooltip="body column 1, row 5">Row 5</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 2, row 5">Row 5</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 3, row 5">Row 5</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 4, row 5">Row 5</TableBodyColumn>
-                <TableBodyColumn tooltip="body column 5, row 5">Row 5</TableBodyColumn>
-              </TableRow>
-            </TableBody>
-          </Table>
+          <Table
+            data={TestingPage.tableData}
+            columns={columns}
+          />
         </div>
-        <Checkbox label="True" checked={true} />
-        <Checkbox label="False" checked={false} />
-        <div>
-          <Icon icon="Arrow" className="button" />
-          <Icon icon="Arrow" className="button" orientation="left" />
-          <Icon icon="Arrow" className="button" orientation="up" />
-          <Icon icon="Arrow" className="button" orientation="right" />
-          <Icon icon="Home" className="button" />
-          <Icon icon="User" className="button" />
-          <Icon icon="Share"className="button"  />
-          <Icon icon="Cog" className="button" />
-          <Icon icon="Trash" className="button" />
-          <Icon icon="Pencil" className="button" />
-          <Icon icon="Lock" className="button" />
-          <Icon icon="Envelope" className="button" />
+        <div className="row">
+            <Checkbox label="True" checked={true} />
+            <Checkbox label="False" checked={false} />
         </div>
-        <div>
-          {TestingPage.people.map((person, i) => {
-            return <div key={i} tabIndex='0' className="col-3 tile"><div style={{width: '100%', height: '200px'}}><Shadow>{person}</Shadow></div></div>})}
-        </div>*/}
-        <span className="link" onClick={openDialog}>Log In</span>
+        <div className="row">
+          <div className="col-12">
+            <Icon icon="Arrow" className="button" />
+            <Icon icon="Arrow" className="button" orientation="left" />
+            <Icon icon="Arrow" className="button" orientation="up" />
+            <Icon icon="Arrow" className="button" orientation="right" />
+            <Icon icon="Home" className="button" />
+            <Icon icon="User" className="button" />
+            <Icon icon="Share" className="button" />
+            <Icon icon="Cog" className="button" />
+            <Icon icon="Trash" className="button" />
+            <Icon icon="Pencil" className="button" />
+            <Icon icon="Lock" className="button" />
+            <Icon icon="Envelope" className="button" />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12">
+            <span className="link" onClick={openDialog}>Log In</span>
+          </div>
+        </div>
         <Dialog show={showDialog} title={<div style={{textAlign: "center"}}><h2>Birth Plan Generator</h2></div>}>
           <LoginForm signIn={signIn} />
         </Dialog>
