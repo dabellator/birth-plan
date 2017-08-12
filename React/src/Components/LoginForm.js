@@ -3,13 +3,14 @@ import Input from './Input';
 import Button from './Button';
 import FormHeader from './FormHeader';
 import { Email } from '../Services/Validation';
+import Auth from '../Services/Authentication';
 
 export default class LoginForm extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      email: '',
       password: ''
     };
     this.onChange = this.onChange.bind(this);
@@ -25,13 +26,14 @@ export default class LoginForm extends Component {
   }
 
   signIn() {
-    const { signIn } = this.props
-    signIn(this.state);
+    const { email, password } = this.state;
+
+    Auth.signIn(email, password);
   }
 
   render() {
     const { onChange, signIn } = this;
-    const { userName, password } = this.state;
+    const { email, password } = this.state;
     return (
       <div className="login-form-wrapper">
         <div className="section sub-header">
@@ -46,10 +48,10 @@ export default class LoginForm extends Component {
           <div className="row">
             <div className="col-12">
               <Input
-                placeholder="Username"
-                value={userName}
+                placeholder="Email"
+                value={email}
                 validationPattern={'Email'}
-                onChange={(e) => onChange(e.target.value, 'userName')}
+                onChange={(e) => onChange(e.target.value, 'email')}
               />
             </div>
           </div>
