@@ -180,16 +180,12 @@
     };
 
     function getImages() {
-      fetch(`${BPGRoutes}/data/BPG-Data-images-MVLLBSNLK1D4`, {
-        method: "GET",
+      fetch('https://qhmn4kkofl.execute-api.us-west-2.amazonaws.com/dev/hello', {
+        method: 'GET',
         mode: 'cors'
       }).then(function(res) {
-        return res.json();
-      }).then(function(data) {
-        data.body.forEach(function(imageData) {
-          addToList(imageData);
-        });
-      });
+        console.log("HELLO TEST: ", res);
+      })
     };
 
     function saveData(data, id) {
@@ -226,7 +222,6 @@
       }
       return id;
     }
-
     getImages();
   </script>
 </body>

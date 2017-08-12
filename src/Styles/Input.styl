@@ -1,0 +1,40 @@
+.input-container
+  height 74px
+
+  label
+    color $main-font
+    display block
+    font-size $xs
+    height 15px
+    left: 1px;
+    position: absolute;
+    pointer-events none
+    top 2px;
+    width inherit
+
+  input
+    background $primary-lighter
+    border none
+    border-radius .3em
+    display block
+    font-size: $sm
+    height 35px
+    margin 0
+    padding .5em
+    position absolute
+    top 20px
+    width 100%
+    &:focus
+      background $white
+      border 2px solid $primary
+    &::placeholder
+      color $main-font-lighter
+  
+  .error-message
+    color $error
+    font-size: $xs;
+    height 15px
+    left: 1px;
+    position: absolute;
+    top: 55px;
+    width inherit
