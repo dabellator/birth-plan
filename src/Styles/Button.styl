@@ -1,0 +1,54 @@
+setSize(size)
+  font-size size
+
+.button-wrapper
+  &:focus
+    outline none
+  &.full-width
+    width 100%
+
+  .button
+    display inline-flex
+    cursor pointer
+    height 35px
+    font-size $baseFontSize
+    border-radius .3em
+    min-width 10em
+    .btn-text
+      margin auto
+    &[disabled]
+      cursor not-allowed!important
+    &.full-width
+      width 100%
+
+  .xs
+    setSize $xs
+
+  .sm
+    setSize $sm
+
+  .md
+    setSize $md
+
+  .lg
+    setSize $lg
+
+  .xl
+    setSize $xl
+
+  .primary
+    background-color transparent
+    border 2px solid $primary
+    color $primary
+    &.active,
+    &[disabled]
+      background-color alpha($primary, .1)
+
+  .secondary
+    background-color $primary
+    border 2px solid $primary
+    color $white
+    &.active,
+    &[disabled]
+      background-color alpha($primary, .8)
+      border-color transparent

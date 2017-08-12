@@ -27,13 +27,19 @@
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
     "object-assign": "4.1.1",
+    "portals": "^1.0.9",
     "postcss-flexbugs-fixes": "3.2.0",
     "postcss-loader": "2.0.6",
     "promise": "8.0.1",
     "react": "^15.6.1",
+    "react-addons-update": "^15.6.0",
     "react-dev-utils": "^3.1.0",
     "react-dom": "^15.6.1",
     "react-error-overlay": "^1.0.10",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.5.9",
@@ -43,8 +49,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "npm run watch:styles & npm run watch:scripts",
+    "build": "npm run build:styles & npm run build:scripts",
+    "build:scripts": "node scripts/build.js",
+    "watch:scripts": "node scripts/start.js",
+    "build:styles": "stylus src/index.styl",
+    "watch:styles": "npm run build:styles -- --watch --sourcemap",
     "test": "node scripts/test.js --env=jsdom"
   },
   "jest": {
@@ -87,5 +97,8 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "stylus": "^0.54.5"
   }
 }
