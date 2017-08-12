@@ -2,12 +2,15 @@
 .button-wrapper:focus {
   outline: none;
 }
+.button-wrapper.full-width {
+  width: 100%;
+}
 .button-wrapper .button {
   display: inline-flex;
   cursor: pointer;
-  padding: 0.8em;
+  height: 35px;
   font-size: 1em;
-  border-radius: 0.2em;
+  border-radius: 0.3em;
   min-width: 10em;
 }
 .button-wrapper .button .btn-text {
@@ -36,21 +39,22 @@
 }
 .button-wrapper .primary {
   background-color: transparent;
-  border: 1px solid #303a40;
+  border: 2px solid #4ecac2;
+  color: #4ecac2;
 }
 .button-wrapper .primary.active,
 .button-wrapper .primary[disabled] {
-  background-color: #e8ecee;
+  background-color: rgba(78,202,194,0.1);
 }
 .button-wrapper .secondary {
-  background-color: #303a40;
-  border: 1px solid rgba(48,58,64,0.5);
+  background-color: #4ecac2;
+  border: 2px solid #4ecac2;
   color: #fff;
 }
 .button-wrapper .secondary.active,
 .button-wrapper .secondary[disabled] {
-  background-color: #637884;
-  border: 1px solid rgba(99,120,132,0.5);
+  background-color: rgba(78,202,194,0.8);
+  border-color: transparent;
 }
 .checkbox-wrapper {
   padding: 0 1em;
@@ -93,8 +97,8 @@
   border-radius: 2px;
 }
 .checkbox-wrapper .checkbox.checked {
-  background-color: #349a85;
-  border-color: #349a85;
+  background-color: #34aca5;
+  border-color: #34aca5;
 }
 .checkbox-wrapper .checkbox .checkmark {
   position: absolute;
@@ -128,11 +132,12 @@
   height: 72px;
 }
 .link {
-  font-size: 0.9em;
   font-weight: bolder;
-  color: #3bad95;
+  color: #3ac2b9;
   cursor: pointer;
-  border-bottom: 1px solid #3bad95;
+}
+.link:hover {
+  border-bottom: 1px solid #3ac2b9;
 }
 .dialog-container {
   top: 0;
@@ -170,27 +175,29 @@
   width: auto;
 }
 .input-dropdown {
+  height: 75px;
   cursor: pointer;
-  font-size: 1em;
 }
 .input-dropdown .input-dropdown-label {
   width: inherit;
   position: absolute;
   height: 15px;
-  top: 0;
-  color: #637884;
+  top: 2px;
+  left: 1px;
+  color: #303a40;
   font-size: 0.8em;
 }
 .input-dropdown .input-dropdown-label.is-active {
-  color: #43bfa5;
+  color: #4ecac2;
 }
 .input-dropdown .input-dropdown-text {
+  font-size: 0.9em;
   height: 35px;
   padding-top: 8px;
   border-bottom: 1px solid #637884;
   position: absolute;
   width: inherit;
-  top: 15px;
+  top: 20px;
 }
 .input-dropdown .input-dropdown-text.placeholder {
   color: #a4b2bb;
@@ -230,6 +237,10 @@
 }
 :focus {
   outline: none;
+}
+.forgot-password .message {
+  padding: 0 0 1em 0;
+  text-align: center;
 }
 .form-header {
   min-height: 2em;
@@ -546,106 +557,97 @@ span.icon svg {
   width: 20px;
   height: 20px;
 }
-.input-container .error-message {
-  width: inherit;
+.input-container {
+  height: 74px;
+}
+.input-container label {
+  color: #303a40;
+  display: block;
+  font-size: 0.8em;
+  height: 15px;
+  left: 1px;
   position: absolute;
-  bottom: 3px;
-  font-size: 12px;
-  color: #ff4b38;
+  pointer-events: none;
+  top: 2px;
+  width: inherit;
 }
 .input-container input {
-  font-family: Raleway, 'sans-serif';
-  padding: 0;
-  position: absolute;
-  top: 15px;
-  margin: 0;
-  background: transparent;
-  width: 100%;
-  font-size: 1em;
-  height: 35px;
+  background: #b8eae7;
   border: none;
-  border-bottom: 1px solid #637884;
+  border-radius: 0.3em;
   display: block;
-}
-.input-container input.error {
-  border-bottom: 1px solid #ff4b38 !important;
+  font-size: 0.9em;
+  height: 35px;
+  margin: 0;
+  padding: 0.5em;
+  position: absolute;
+  top: 20px;
+  width: 100%;
 }
 .input-container input:focus {
-  outline: none;
+  background: #fff;
+  border: 2px solid #4ecac2;
 }
 .input-container input::placeholder {
   color: #a4b2bb;
 }
-.input-container label {
-  width: inherit;
-  height: 15px;
-  color: #637884;
-  font-size: 1em;
-  display: block;
-  position: absolute;
-  top: 25px;
-  left: 1px;
-  pointer-events: none;
-  transition: 0.2s ease all;
-  -moz-transition: 0.2s ease all;
-  -webkit-transition: 0.2s ease all;
-}
-.input-container .text-input:focus ~ label,
-.input-container .label.floating-label {
+.input-container .error-message {
+  color: #ff4b38;
   font-size: 0.8em;
-  top: 0;
-}
-.input-container .text-input:focus ~ label {
-  color: #43bfa5;
-}
-.input-container .text-input:focus+.underline {
-  transform: scale(1);
-}
-.input-container .underline {
+  height: 15px;
+  left: 1px;
   position: absolute;
-  top: 49px;
-  display: block;
-  height: 2px;
-  width: 100%;
-  background-color: #43bfa5;
-  -webkit-transform: scale(0, 1);
-  transform: scale(0, 1);
-  -webkit-transition: all 0.3s linear;
-  transition: all 0.3s linear;
-}
-.input-container .underline.error {
-  background-color: #ff4b38 !important;
+  top: 55px;
+  width: inherit;
 }
 .login-form-wrapper {
-  background: #fff;
-  width: 100%;
-  max-width: 400px;
-  line-height: 1.2em;
   display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  background: #fff;
+  line-height: 1.2em;
+}
+.login-form-wrapper .form-container {
+  position: relative;
+  padding: 0.8em;
+  width: 100%;
+  height: 100%;
+  max-width: 380px;
+  max-height: 700px;
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
-.login-form-wrapper .section {
+.login-form-wrapper .form-container .login-form {
+  margin: 30px 0;
   width: 100%;
 }
-.login-form-wrapper .sub-header {
-  padding-top: 0.8em;
+.login-form-wrapper .form-container .logo {
+  width: 100%;
+  text-align: center;
 }
-.login-form-wrapper .link {
-  line-height: 2em;
-  margin-left: 0.8em;
-  margin-right: 0.8em;
-}
-.login-form-wrapper .forgot-password {
+.login-form-wrapper .form-container .forgot-password-wrapper {
+  max-height: 58px;
+  width: 100%;
+  text-align: center;
   padding-top: 0.8em;
   padding-bottom: 0.8em;
+  font-size: 0.8em;
 }
 .menu-item {
   background: #fff;
   cursor: pointer;
+  font-size: 0.9em;
   padding: 0.8em;
   display: block;
   list-style: none;
-  height: 45px;
 }
 .menu-item.disabled {
   color: #a4b2bb;
@@ -656,7 +658,7 @@ span.icon svg {
   background-color: #dde2e5;
 }
 .menu-item.selected {
-  color: #43bfa5;
+  color: #4ecac2;
 }
 .shadow {
   background: #fff;
@@ -756,7 +758,7 @@ tr.table-row {
   -webkit-border-radius: 0.2em;
   -moz-border-radius: 0.2em;
   border-radius: 0.2em;
-  background-color: #303a40;
+  background-color: rgba(48,58,64,0.8);
   color: #fff;
   content: attr(data-tooltip);
   text-align: center;
@@ -766,8 +768,8 @@ tr.table-row {
   position: absolute;
   bottom: 150%;
   margin-left: 30px;
-  border-top: 5px solid #000;
-  border-top: 5px solid #303a40;
+  border-top: 5px solid rgba(48,58,64,0.8);
+  border-top: 5px solid rgba(48,58,64,0.8);
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
   content: " ";
@@ -790,7 +792,7 @@ body,
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #ecf9f6;
+  background-color: #fff;
   font-family: Raleway, 'sans-serif';
   color: #303a40;
 }
@@ -799,6 +801,7 @@ body *,
 #root *,
 .App * {
   box-sizing: border-box;
+  font-family: Raleway, 'sans-serif';
 }
 h1,
 h2,

@@ -17,7 +17,7 @@
     -webkit-border-radius: .2em;
     -moz-border-radius: .2em;
     border-radius: .2em;
-    background-color: $main-font
+    background-color alpha($main-font, .8)
     color: #fff;
     content: attr(data-tooltip);
     text-align: center;
@@ -27,8 +27,8 @@
     position: absolute;
     bottom: 150%;
     margin-left 30px
-    border-top: 5px solid $black;
-    border-top: 5px solid $main-font
+    border-top: 5px solid alpha($main-font, .8)
+    border-top: 5px solid alpha($main-font, .8)
     border-right: 5px solid transparent;
     border-left: 5px solid transparent;
     content: " ";

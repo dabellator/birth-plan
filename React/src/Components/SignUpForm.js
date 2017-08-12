@@ -3,7 +3,7 @@ import Input from './Input';
 import Button from './Button';
 import NavItem from './NavItem';
 
-export default class LoginForm extends Component {
+export default class SignUpForm extends Component {
 
     constructor(props) {
         super(props);
@@ -18,17 +18,12 @@ export default class LoginForm extends Component {
         this.setState({ [type]: value })
     }
 
-    navClicked() {
-        console.log("nav clicked");
-    }
-
     render() {
         const { onChange } = this;
-        const { login } = this.props;
+        const { signUp } = this.props;
         const { email, password } = this.state;
         return (
             <div>
-                <NavItem title="Test" navClicked={this.navClicked.bind(this)} />
                 <Input
                     label="Email"
                     value={email}
@@ -41,7 +36,7 @@ export default class LoginForm extends Component {
                     type="password"
                     onChange={(e) => onChange(e.target.value, 'password')}
                 />
-                <Button fullWidth onClick={login.bind(null, this.state)} buttonClassName="secondary sm">Login</Button> 
+                <Button fullWidth onClick={signUp.bind(null, this.state)} buttonClassName="primary sm">Sign Up</Button> 
             </div>
         )
     }

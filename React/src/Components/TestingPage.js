@@ -5,7 +5,7 @@ import DropdownInput from './DropdownInput';
 import Table from './Table';
 import Checkbox from './Checkbox';
 import Icon from './Icon';
-import LoginForm from './LoginForm';
+import AccountVerification from './AccountVerification';
 import Dialog from './Dialog';
 
 export default class TestingPage extends Component {
@@ -46,7 +46,6 @@ export default class TestingPage extends Component {
     this.confirm = this.confirm.bind(this);
     this.updateDropdownItem = this.updateDropdownItem.bind(this);
     this.openDialog = this.openDialog.bind(this);
-    this.signIn = this.signIn.bind(this);
     this.getImages = this.getImages.bind(this);
   }
 
@@ -68,12 +67,6 @@ export default class TestingPage extends Component {
 
   confirm() {
     console.log(this.state);
-  }
-
-  signIn(creds) {
-    this.setState({ showDialog: false }, () => {
-      console.log("CREDS", creds)
-    })
   }
 
   onChange(value, type) {
@@ -114,7 +107,7 @@ export default class TestingPage extends Component {
     console.log("images? ", this.props.images)
     return (
       <div className="test-page-wrapper">
-        <div className="row">
+        {/* <div className="row">
           <div className="col-12">
             <h2>Birth Plan Generator</h2>
           </div>
@@ -124,6 +117,7 @@ export default class TestingPage extends Component {
             <Input
               label="Email Address"
               floatingLabel
+              validationPattern="Email"
               value={emailAddress}
               onChange={(e) => onChange(e.target.value, 'emailAddress')}
             />
@@ -132,8 +126,6 @@ export default class TestingPage extends Component {
         <div className="row">
           <div className="col-6">
             <Input
-              error
-              errorMessage="Test Error"
               label="First Name"
               placeholder="Enter your first name"
               value={firstName}
@@ -217,10 +209,8 @@ export default class TestingPage extends Component {
           <div className="col-12">
             <span className="link" onClick={openDialog}>Log In</span>
           </div>
-        </div>
-        <Dialog show={showDialog} title={<div style={{textAlign: "center"}}><h2>Birth Plan Generator</h2></div>}>
-          <LoginForm signIn={signIn} />
-        </Dialog>
+        </div> */}
+         <AccountVerification /> 
       </div>
     );
   }

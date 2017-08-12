@@ -4,13 +4,15 @@ setSize(size)
 .button-wrapper
   &:focus
     outline none
+  &.full-width
+    width 100%
 
   .button
     display inline-flex
     cursor pointer
-    padding $xs
+    height 35px
     font-size $baseFontSize
-    border-radius .2em
+    border-radius .3em
     min-width 10em
     .btn-text
       margin auto
@@ -36,16 +38,17 @@ setSize(size)
 
   .primary
     background-color transparent
-    border 1px solid $main-font
+    border 2px solid $primary
+    color $primary
     &.active,
     &[disabled]
-      background-color lighten($main-font, 90%)
+      background-color alpha($primary, .1)
 
   .secondary
-    background-color $main-font
-    border 1px solid alpha($main-font, .5)
+    background-color $primary
+    border 2px solid $primary
     color $white
     &.active,
     &[disabled]
-      background-color $main-font-light
-      border 1px solid alpha($main-font-light, .5)
+      background-color alpha($primary, .8)
+      border-color transparent

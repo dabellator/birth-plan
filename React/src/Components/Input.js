@@ -35,6 +35,7 @@ export default class Input extends Component {
 
     return (
       <div className="input input-container" style={inputContainerStyle}>
+        <label className={inputLabelClass}>{label}</label>
         <input
           className={inputClass}
           type={type || "text"}
@@ -47,9 +48,7 @@ export default class Input extends Component {
           value={value}
         >
         </input>
-        <span className={underlineClass}></span>
         {validationObj.isValid ?  null : <div className={"error-message"}>{validationObj.message}</div>}
-        <label className={inputLabelClass}>{label}</label>
       </div>
     )
   }
