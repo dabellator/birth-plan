@@ -1,21 +1,24 @@
 @require 'Styles/Theme.styl'
 @require 'Styles/*'
 
-html, body, #root, .App
+@font-face
+   font-family Ubuntu
+   src url(Assets/UbuntuTitling-Bold-webfont.woff)
+
+html, body, #root, .app
   padding 0
   margin 0
-  min-height 100vh
-  min-width 100vw
   box-sizing border-box
   overflow-x hidden
   overflow-y auto
   background-color $white
-  font-family Raleway, 'sans-serif'
+  font-family Ubuntu, 'sans-serif'
   color $main-font
+  height 100vh
 
   *
     box-sizing border-box
-    font-family Raleway, 'sans-serif'
+    font-family Ubuntu, 'sans-serif'
 
 h1,
 h2,

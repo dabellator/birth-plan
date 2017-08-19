@@ -40,11 +40,11 @@ export default class Button extends Component {
   }
 
   render() {
-    const { buttonWrapperClassName, buttonClassName, disabled, onClick, fullWidth } = this.props;
+    const { buttonWrapperClassName, buttonClassName, disabled, onClick, fullWidth, style } = this.props;
     const { active } = this.state;
     const { onMouseEnter, onMouseLeave, onFocus, onBlur, onKeyDown } = this;
-    const buttonWrapper = combineClasses( 'button-wrapper', buttonWrapperClassName, fullWidth ? 'full-width' : '' );
-    const buttonClass = combineClasses( 'button', buttonClassName, active ? 'active' : '', fullWidth ? 'full-width' : '' );
+    const buttonWrapper = combineClasses( 'button-wrapper', buttonWrapperClassName, fullWidth ? 'full-width' : null );
+    const buttonClass = combineClasses( 'button', buttonClassName, active ? 'active' : null, fullWidth ? 'full-width' : null );
     return (
       <div
         onKeyDown={!disabled ? onKeyDown : null}
@@ -56,7 +56,7 @@ export default class Button extends Component {
         className={buttonWrapper}
         tabIndex={0}
       >
-        <button disabled={disabled} className={buttonClass}>
+        <button style={style} disabled={disabled} className={buttonClass}>
           <span className='btn-text'>{this.props.children}</span>
         </button>
       </div>

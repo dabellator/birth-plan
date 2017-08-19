@@ -36,7 +36,7 @@ export default class SignUpForm extends Component {
                     type="password"
                     onChange={(e) => onChange(e.target.value, 'password')}
                 />
-                <Button fullWidth onClick={signUp.bind(null, this.state)} buttonClassName="primary sm">Sign Up</Button> 
+              <Button fullWidth onClick={signUp.bind(null, this.state)} buttonClassName="secondary sm">Sign Up</Button> 
             </div>
         )
     }
