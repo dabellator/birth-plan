@@ -2,7 +2,9 @@ import EditPlan from '../Components/EditPlan';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
-  return { };
+  return {
+    images: state.session.images
+  };
 }
 
 function mapDispatchToProps(dispatch) {
