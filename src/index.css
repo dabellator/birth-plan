@@ -781,6 +781,10 @@ tr.table-row {
   visibility: visible;
   opacity: 1;
 }
+@font-face {
+  font-family: Ubuntu;
+  src: url("Assets/UbuntuTitling-Bold-webfont.woff");
+}
 html,
 body,
 #root,
@@ -801,7 +805,7 @@ body *,
 #root *,
 .App * {
   box-sizing: border-box;
-  font-family: Raleway, 'sans-serif';
+  font-family: Ubuntu, 'sans-serif';
 }
 h1,
 h2,

@@ -8,11 +8,10 @@ module.exports.create = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: process.env.DYNAMODB_PLANS,
+    TableName: process.env.DYNAMODB_IMAGEDATA,
     Item: {
       id: uuid(),
-      selections: data.selections,
-      personalInfo: data.personalInfo,
+      filename: data.filename,
       createdAt: timestamp,
       updatedAt: timestamp,
     },
@@ -23,7 +22,7 @@ module.exports.create = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the plan.'));
+      callback(new Error('Couldn\'t create the iamge data.'));
       return;
     }
 
@@ -38,25 +37,26 @@ module.exports.create = (event, context, callback) => {
 
 module.exports.get = (event, context, callback) => {
   const params = {
-    TableName: process.env.DYNAMODB_PLANS,
-    Key: {
-      id: event.pathParameters.id,
-    },
+    TableName: process.env.DYNAMODB_IMAGEDATA
   };
 
   // fetch todo from the database
-  dynamodb.get(params, (error, result) => {
+  dynamodb.scan(params, (error, result) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t fetch the plan.'));
+      callback(new Error('Couldn\'t fetch the image data.'));
       return;
     }
 
     // create a response
     const response = {
       statusCode: 200,
-      body: JSON.stringify(result.Item),
+      headers: {
+        "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
+        "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
+      },
+      body: JSON.stringify(result.Items),
     };
     callback(null, response);
   });
@@ -67,15 +67,15 @@ module.exports.update = (event, context, callback) => {
   const data = JSON.parse(event.body);
 
   const params = {
-    TableName: process.env.DYNAMODB_PLANS,
+    TableName: process.env.DYNAMODB_IMAGEDATA,
     Key: {
       id: event.pathParameters.id,
     },
     ExpressionAttributeValues: {
-      ':selections': data.selections,
+      ':filename': data.filename,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET selections = :selections, updatedAt = :updatedAt',
+    UpdateExpression: 'SET filename = :filename, updatedAt = :updatedAt',
     ReturnValues: 'ALL_NEW',
   };
 
@@ -84,7 +84,7 @@ module.exports.update = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t update the plan.'));
+      callback(new Error('Couldn\'t update the image data.'));
       return;
     }
 
