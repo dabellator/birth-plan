@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { combineClasses } from '../Services/Common';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router';
 
 export default class NavItem extends Component {
 
@@ -17,7 +17,7 @@ export default class NavItem extends Component {
   render() {
       const { title, url } = this.props;
       return (
-        <NavLink className="nav-link" activeClassName="active" to={url}>{title}</NavLink>
+        <Link className="nav-link" activeClassName="active" to={url}>{title}</Link>
       )
   }
 }

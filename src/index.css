@@ -1,4 +1,56 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway");
+.app-header-wrapper {
+  width: 100%;
+  background: #4ecac2;
+  display: flex;
+  flex-wrap: wrap;
+}
+.app-header-wrapper .header-section {
+  align-self: center;
+  color: #edfaf9;
+}
+.app-header-wrapper .app-name {
+  text-align: left;
+  padding-left: 0.8em;
+  flex: 0 0 25%;
+  order: 1;
+}
+.app-header-wrapper .nav-bar {
+  flex-wrap: nowrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex: 0 0 50%;
+  order: 2;
+}
+.app-header-wrapper .greeting {
+  text-align: right;
+  padding-right: 0.8em;
+  flex: 0 0 25%;
+  font-size: 10px;
+  order: 3;
+}
+@media (max-width: 768px) {
+  .nav-bar {
+    flex: 0 0 100% !important;
+    order: 3 !important;
+  }
+  .app-name {
+    flex: 0 0 50% !important;
+    order: 1 !important;
+  }
+  .greeting {
+    flex: 0 0 50% !important;
+    order: 2 !important;
+  }
+  .header-section {
+    padding-top: 0.3em;
+  }
+}
+.view-wrapper {
+  text-align: center;
+  width: 100%;
+}
 .button-wrapper:focus {
   outline: none;
 }
@@ -11,7 +63,6 @@
   height: 35px;
   font-size: 1em;
   border-radius: 0.3em;
-  min-width: 10em;
 }
 .button-wrapper .button .btn-text {
   margin: auto;
@@ -132,12 +183,12 @@
   height: 72px;
 }
 .link {
-  font-weight: bolder;
   color: #3ac2b9;
   cursor: pointer;
+  text-decoration: none;
 }
 .link:hover {
-  border-bottom: 1px solid #3ac2b9;
+  text-decoration: underline;
 }
 .dialog-container {
   top: 0;
@@ -447,7 +498,7 @@
 .col-12.middle {
   margin: auto !important;
 }
-@media screen and (max-width: 48em) {
+@media screen and (max-width: 768px) {
   .col-1 {
     width: 25%;
   }
@@ -485,7 +536,7 @@
     width: 100%;
   }
 }
-@media screen and (max-width: 30em) {
+@media screen and (max-width: 480px) {
   .col-1 {
     width: 50%;
   }
@@ -569,7 +620,6 @@ span.icon svg {
   position: absolute;
   pointer-events: none;
   top: 2px;
-  width: inherit;
 }
 .input-container input {
   background: #b8eae7;
@@ -598,7 +648,6 @@ span.icon svg {
   left: 1px;
   position: absolute;
   top: 55px;
-  width: inherit;
 }
 .login-form-wrapper {
   display: flex;
@@ -659,6 +708,51 @@ span.icon svg {
 }
 .menu-item.selected {
   color: #4ecac2;
+}
+.nav-link {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  text-decoration: none;
+  border: none;
+  background: transparent;
+  padding: 0.3em 0;
+  cursor: pointer;
+  color: #b8eae7 !important;
+  font-size: 0.8em;
+  width: 100%;
+}
+.nav-link.active {
+  color: #fff !important;
+  border-bottom: 2px solid #fff;
+}
+.nav-link:hover {
+  color: #fff !important;
+}
+.preference-selector-wrapper {
+  width: 100%;
+  max-width: 350px;
+  margin: 1em 0;
+}
+.preference-selector-wrapper .content-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: noWrap;
+}
+.preference-selector-wrapper .content-wrapper .icon-wrapper {
+  flex: 0 0 50%;
+  height: 100px;
+  width: 75px;
+}
+.preference-selector-wrapper .content-wrapper .content {
+  flex: 0 0 50%;
+}
+.preference-selector-wrapper .content-wrapper .content .description {
+  font-size: 10px;
+  padding: 0.5em 0;
+}
+.preference-selector-wrapper .button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 .shadow {
   background: #fff;
@@ -734,10 +828,6 @@ th.table-header-column .table-header-column-text {
 tr.table-row {
   border-bottom: 1px solid #a4b2bb;
 }
-.test-page-wrapper {
-  width: 100vw;
-  height: 100vh;
-}
 [data-tooltip] {
   position: relative;
   z-index: 2;
@@ -781,27 +871,30 @@ tr.table-row {
   visibility: visible;
   opacity: 1;
 }
+@font-face {
+  font-family: Ubuntu;
+  src: url("Assets/UbuntuTitling-Bold-webfont.woff");
+}
 html,
 body,
 #root,
-.App {
+.app {
   padding: 0;
   margin: 0;
-  min-height: 100vh;
-  min-width: 100vw;
   box-sizing: border-box;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: #fff;
-  font-family: Raleway, 'sans-serif';
+  font-family: Ubuntu, 'sans-serif';
   color: #303a40;
+  height: 100vh;
 }
 html *,
 body *,
 #root *,
-.App * {
+.app * {
   box-sizing: border-box;
-  font-family: Raleway, 'sans-serif';
+  font-family: Ubuntu, 'sans-serif';
 }
 h1,
 h2,

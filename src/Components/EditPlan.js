@@ -123,12 +123,24 @@ export default class EditPlan extends Component {
         description: 'this is where the description will go for the twenty ninth item.'
       },
     ]
+
+    const images = this.renderImages();
+
     return (
       <AppView>
           <div style={{padding: '0 1em', display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around'}}>
-            {preferences.map(p => <PreferenceSelector preference={p} />)}
+            {/* {preferences.map(p => <PreferenceSelector preference={p} />)} */}
+            {images}
           </div>
       </AppView>
     )
+  }
+
+  renderImages() {
+    return this.props.images.map((image, i) => {
+      return (
+        <img key={i} src={image} style={{width:'3em',height:'3em'}}/>
+      )
+    })
   }
 }
