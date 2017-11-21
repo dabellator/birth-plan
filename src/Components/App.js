@@ -4,10 +4,10 @@ export default class App extends React.Component {
 
   componentWillMount() {
     this.props.fetchAll();
+    this.props.fetchOptions();
   }
 
   render () {
-    console.log("APP: ", this.props.children);
     return (
       <div className='app'>
         {this.props.children}

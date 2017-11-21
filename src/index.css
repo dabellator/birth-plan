@@ -51,6 +51,28 @@
   text-align: center;
   width: 100%;
 }
+#header {
+  text-align: center;
+  font-family: 'Muli';
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+#info img {
+  width: 50%;
+}
+#images img {
+  width: 100px;
+  height: 100px;
+  margin: 15px;
+  padding: 15px;
+}
+.med {
+  width: 20%;
+  float: left;
+}
+.med img {
+  width: 90%;
+}
 .button-wrapper:focus {
   outline: none;
 }
@@ -577,8 +599,8 @@
 span.icon {
   position: relative;
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 7em;
+  height: 7em;
   background: transparent;
   padding: 0.8em;
 }
@@ -600,13 +622,21 @@ span.icon[orientation = 'right'] {
 span.icon.button {
   cursor: pointer;
 }
-span.icon svg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 20px;
-  height: 20px;
+span.icon img {
+  background-color: #fff;
+  width: 100%;
+}
+span.icon .icon {
+  width: 5em;
+  height: 5em;
+  margin: 1em;
+}
+span.icon .icon img {
+  width: 100%;
+}
+span.selected {
+  background-color: #ff0;
+  border-radiua: 0.5em;
 }
 .input-container {
   height: 74px;

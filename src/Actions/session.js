@@ -29,3 +29,9 @@ export function fetchImageLocations() {
     })
   }
 }
+
+export function setSelection(selection) {
+  return dispatch => {
+    dispatch({type: 'SET_SELECTION', selection})
+  }
+}

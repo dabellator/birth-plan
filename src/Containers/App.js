@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import App from '../Components/App';
-import { fetchAll } from '../Actions/session';
+import { fetchAll, fetchOptions } from '../Actions/session';
 
 function mapStateToProps(state) {
   return { };
@@ -9,7 +9,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
-    fetchAll
+    fetchAll,
+    fetchOptions
   }, dispatch);
 };
 
