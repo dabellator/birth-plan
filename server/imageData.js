@@ -1,4 +1,4 @@
-'use strict';
+
 
 const uuid = require('./uuid');
 const dynamodb = require('./dynamodb');
@@ -22,7 +22,7 @@ module.exports.create = (event, context, callback) => {
     // handle potential errors
     if (error) {
       console.error(error);
-      callback(new Error('Couldn\'t create the iamge data.'));
+      callback(new Error('Couldn\'t create the image data.'));
       return;
     }
 
@@ -69,13 +69,15 @@ module.exports.update = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_IMAGEDATA,
     Key: {
-      id: event.pathParameters.id,
+      id: data.id,
     },
     ExpressionAttributeValues: {
       ':filename': data.filename,
+      ':iconOrder': data.iconOrder,
+      ':alt': data.alt,
       ':updatedAt': timestamp,
     },
-    UpdateExpression: 'SET filename = :filename, updatedAt = :updatedAt',
+    UpdateExpression: 'SET filename = :filename, updatedAt = :updatedAt, iconOrder = :iconOrder, alt = :alt',
     ReturnValues: 'ALL_NEW',
   };
 

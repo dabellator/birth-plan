@@ -118,7 +118,7 @@ functions:
     handler: imageData.create
     events:
       - http:
-          path: image-data
+          path: imageData
           method: post
           cors: true
 
@@ -126,7 +126,7 @@ functions:
     handler: imageData.get
     events:
       - http:
-          path: image-data
+          path: imageData
           method: get
           cors: true
 
@@ -134,7 +134,7 @@ functions:
     handler: imageData.update
     events:
       - http:
-          path: image-data
+          path: imageData
           method: put
           cors: true
 
