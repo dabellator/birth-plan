@@ -20,7 +20,7 @@ export default class ViewPlan extends Component {
   renderSelectedImages() {
     return this.props.selected && Object.keys(this.props.selected).reduce((acc, selection) => {
       if (this.props.selected[selection]) acc.push((
-        <div className='med'>
+        <div className='med' key={selection}>
           <img src={selection} alt='bpg icon'/>
         </div>
       ));

@@ -3,14 +3,23 @@ setRotation(rotation)
   -webkit-transform rotate(rotation)
   transform rotate(rotation)
 
+.iconDataList
+  clear left
+
+.icon
+  float left
+  width 5em
+  margin 2em
+
+  img
+    width 100%
 
 span.icon
   position relative
   display inline-block
-  width 7em
-  height 7em
+  width 15%
   background transparent
-  padding $xs
+  padding $xl
   &[orientation = 'up']
     setRotation(180deg)
   &[orientation = 'left']

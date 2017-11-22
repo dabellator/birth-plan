@@ -596,13 +596,23 @@
     width: 100%;
   }
 }
+.iconDataList {
+  clear: left;
+}
+.icon {
+  float: left;
+  width: 5em;
+  margin: 2em;
+}
+.icon img {
+  width: 100%;
+}
 span.icon {
   position: relative;
   display: inline-block;
-  width: 7em;
-  height: 7em;
+  width: 15%;
   background: transparent;
-  padding: 0.8em;
+  padding: 1.2em;
 }
 span.icon[orientation = 'up'] {
   -ms-transform: rotate(180deg);

@@ -11,6 +11,7 @@ import ViewPlan from './Containers/ViewPlan';
 import EditPlan from './Containers/EditPlan';
 import Settings from './Containers/Settings';
 import Share from './Containers/Share';
+import Admin from './Containers/Admin';
 
 import { fetchAll } from './Actions/session';
 import Api from './Services/Api';
@@ -27,6 +28,7 @@ function init () {
           <Route path='/edit' component={EditPlan} />
           <Route path='/settings' component={Settings} />
           <Route path='/share' component={Share} />
+          <Route path='/admin' component={Admin} />
         </Route>
       </Router>
     </Provider>

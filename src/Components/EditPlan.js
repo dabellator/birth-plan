@@ -22,12 +22,12 @@ export default class EditPlan extends Component {
 
   renderImages() {
     return this.props.images.map((image, i) => {
-      const classnames = `icon ${this.props.selected[image] ? 'selected' : ''}`;
+      const classnames = `icon ${this.props.selected[image.filename] ? 'selected' : ''}`;
       
       return (
         <span className={classnames} key={i}>
           <img
-            src={image}
+            src={image.filename}
             alt='bpg icon'
             onClick={this.handleClick}
           />
