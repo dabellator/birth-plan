@@ -8,8 +8,9 @@ export default class ViewPlan extends Component {
     return (
       <div id="header">
 		  	<div id="info"><img src="images/logo-work4-01.png" alt='bpg icon' /></div>
-			  <div id="name"></div>
+			  <div id="name">{this.props.name}</div>
 			  <div id="title">Birth Preferences</div>
+        <div id="description">{this.props.description}</div>
 			  <div id="selectedImages">
           {selectedImages}
         </div>

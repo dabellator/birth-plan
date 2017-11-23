@@ -5,7 +5,7 @@ const imageHost = 'https://s3-us-west-2.amazonaws.com/serverless-bpg-image-handl
 function concatUrl(image) {
   return {
     ...image,
-    filename: `${imageHost}/${image.filename}`
+    location: `${imageHost}/${image.filename}`
   };
 }
 
@@ -26,9 +26,10 @@ export function fetchOptions() {
 
 export function fetchImageLocations() {
   return dispatch => {
-    Api.get('/image-data').then(res => {
-      console.log(res.body)
-      const imageLocations = res.body.map(concatUrl);
+    Api.get('/imageData').then(res => {
+      const imageLocations = res.body.map(concatUrl).sort((current, next) => {
+        return parseInt(current.iconOrder, 10) > parseInt(next.iconOrder, 10) ? 1 : -1;
+      }).filter(iconData => iconData.iconOrder > 0);
       dispatch({type: 'FETCH_IMAGELOCATION_SUCCESS', body: imageLocations});
     })
   }
@@ -40,10 +41,13 @@ export function setSelection(selection) {
   }
 }
 
+export function updateForm(formValues) {
+  return dispatch => dispatch({type: 'UPDATE_FORM', ...formValues})
+}
+
 export function updateImageData(imageData) {
   return dispatch => {
-    Api.put(`image-data`, {...imageData}).then(res => {
-      console.log(res.body)
+    Api.put(`imageData`, {...imageData}).then(res => {
       dispatch({type: 'IMAGE_DATA_UPDATED', body: res.body})
     })
   }

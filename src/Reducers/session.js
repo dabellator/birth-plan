@@ -3,7 +3,9 @@ import update from 'react-addons-update';
 const defaultState = {
   options: [],
   images: [],
-  selected: {}
+  selected: {},
+  name: '',
+  description: ''
 };
 
 export default function (state = defaultState, action) {
@@ -19,6 +21,9 @@ export default function (state = defaultState, action) {
         selected[action.selection] = selected[action.selection] ? !selected[action.selection] : 'true';
         return selected;
       }}})
+
+    case 'UPDATE_FORM':
+      return update(state, { [action.key]: {$set: action.value}})
 
     default:
       return state;
