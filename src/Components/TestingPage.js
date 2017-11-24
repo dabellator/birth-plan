@@ -7,6 +7,8 @@ import Checkbox from './Checkbox';
 import Icon from './Icon';
 import AccountVerification from './AccountVerification';
 import Dialog from './Dialog';
+import ViewPlan from './ViewPlan';
+import LoginForm from './LoginForm';
 
 export default class TestingPage extends Component {
 
@@ -106,7 +108,7 @@ export default class TestingPage extends Component {
     ]
     console.log("images? ", this.props.images)
     return (
-      <div className="test-page-wrapper">
+      <div style={{height: 'inherit'}} className="test-page-wrapper">
         {/* <div className="row">
           <div className="col-12">
             <h2>Birth Plan Generator</h2>
@@ -210,7 +212,8 @@ export default class TestingPage extends Component {
             <span className="link" onClick={openDialog}>Log In</span>
           </div>
         </div> */}
-         <AccountVerification /> 
+         {/*}<AccountVerification />*/}
+         <ViewPlan />
       </div>
     );
   }

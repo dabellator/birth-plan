@@ -3,14 +3,23 @@ setRotation(rotation)
   -webkit-transform rotate(rotation)
   transform rotate(rotation)
 
+.iconDataList
+  clear left
+
+.icon
+  float left
+  width 5em
+  margin 2em
+
+  img
+    width 100%
 
 span.icon
   position relative
   display inline-block
-  width 20px
-  height 20px
+  width 15%
   background transparent
-  padding $xs
+  padding $xl
   &[orientation = 'up']
     setRotation(180deg)
   &[orientation = 'left']
@@ -21,10 +30,18 @@ span.icon
   &.button
     cursor pointer
 
-  svg
-    position absolute
-    top 50%
-    left 50%
-    transform translate(-50%, -50%)
-    width 20px
-    height 20px
+  img
+    background-color white
+    width 100%
+
+  .icon
+    width 5em
+    height 5em
+    margin 1em
+
+    img
+      width 100%
+
+span.selected
+  background-color yellow
+  border-radiua .5em

@@ -5,8 +5,6 @@ const defaultState = {
 };
 
 export default function (state = defaultState, action) {
-  console.log('action', action)
-  console.log('state', state)
   switch (action.type) {
     case 'FETCH_IMAGES':
       return update(state, { images: {$set: action.images} })

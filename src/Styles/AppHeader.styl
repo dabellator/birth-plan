@@ -1,0 +1,51 @@
+.app-header-wrapper
+  width 100%
+  background: $primary;
+  display flex
+  flex-wrap wrap
+
+  @media print
+    display none
+
+  .header-section
+    align-self center
+    color $primary-lightest
+
+  .app-name
+    text-align left
+    padding-left $xs
+    flex 0 0 25%
+    order 1
+
+  .nav-bar
+    flex-wrap: nowrap;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex 0 0 50%
+    order 2
+
+  .greeting
+    text-align right
+    padding-right $xs
+    flex 0 0 25%
+    font-size 10px
+    order 3
+
+@media (max-width: $media-medium) {
+  .nav-bar {
+    flex 0 0 100% !important
+    order 3 !important
+  }
+  .app-name {
+    flex 0 0 50% !important
+    order 1 !important
+  }
+  .greeting {
+    flex 0 0 50% !important
+    order 2 !important
+  }
+  .header-section {
+    padding-top .3em
+  }
+}
