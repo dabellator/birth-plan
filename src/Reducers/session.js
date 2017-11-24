@@ -5,11 +5,20 @@ const defaultState = {
   images: [],
   selected: {},
   name: '',
-  description: ''
+  description: '',
+  id: ''
 };
 
 export default function (state = defaultState, action) {
   switch (action.type) {
+    case 'FETCH_PLAN_SUCCESS':
+      return update(state, {
+        selected: {$set: action.body.selected},
+        name: {$set: action.body.name},
+        description: {$set: action.body.description},
+        id: {$set: action.body.id}
+      })
+
     case 'FETCH_OPTIONS_SUCCESS':
       return update(state, { options: {$set: action.body} })
 
