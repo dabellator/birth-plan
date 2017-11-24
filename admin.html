@@ -10,6 +10,9 @@
     body {
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     }
+    .select {
+      border: 3px solid yellow;
+    }
     .aligner {
       display: flex;
       align-items: center;
@@ -21,17 +24,40 @@
 <body>
   <div class="aligner">
     <input type="file" onchange="handleFileUpload()" multiple><br>
+    <div id='optionForm'>
+      <input type='text' id='optionTitle' placeholder='title' />
+      <input type='textfield' id='optionDescription' placeholder='description' />
+    </div>
+    <div id='selections'></div>
+    <div id='optionButton'></div>
+    <div id="options">
+      <ul id="greenOption" style="float:left"></ul>
+      <ul id="redOption" style="float:right"></ul>
+    </div>
     <div id="imageList">
-      <ul id="images">
-      </ul>
+      <ul id="images"></ul>
+    </div>
   </div>
 
   <script type="text/javascript">
     var drop = document.getElementById('drop');
     var list = document.getElementById('list');
     var images = document.getElementById('images');
-    var BPGRoutes = "https://e3hr1v9ebl.execute-api.us-west-2.amazonaws.com/prod";
-    var s3BucketURL = "https://s3-us-west-2.amazonaws.com/bpg-image-test";
+    var BPGRoutes = "https://yaac7tr9s8.execute-api.us-west-2.amazonaws.com/dev";
+    var s3BucketURL = "https://s3-us-west-2.amazonaws.com/serverless-bpg-image-handler";
+    var selections = [];
+    var options = [];
+    var headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    var submitText = document.createTextNode('submit');
+    var submit = document.createElement('button');
+    submit.addEventListener('click', function() {
+      submitOption();
+    })
+    submit.appendChild(submitText);
+    document.getElementById('optionButton').appendChild(submit);
 
     function cancel(e) {
       e.preventDefault();
@@ -118,6 +144,86 @@
       return dataForm;
     }
 
+    function createOptions(imageData) {
+      var red = document.getElementById('redOption');
+      var green = document.getElementById('greenOption');
+      var list = imageData.filename[0] === 'r' ? red : green;
+
+      var imageLI = createImageLI(imageData);
+      imageLI.addEventListener('click', function() {
+        this.setAttribute('class', 'select');
+        selections.push(imageData.id);
+        options.push(imageData.id);
+      })
+      list.appendChild(imageLI);
+
+      updateList();
+    }
+
+    function submitOption(e) {
+      var title = document.getElementById('optionTitle');
+      var description = document.getElementById('optionDescription');
+
+      options.concat(selections);
+
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", `${BPGRoutes}/options`, true);
+      xhr.setRequestHeader("Content-type", "application/json");
+      xhr.onreadystatechange = function() {
+        if(xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+          console.log(xhr);
+        //   var green = document.getElementById('greenOption').children;
+        //   var red = document.getElementById('redOption').children;
+        //   var i = 0;
+        //   var j = 0;
+        //
+          title.value = '';
+          description.value = '';
+        //   while (i < green.length) {
+        //     green[i].removeAttribute('class');
+        //   }
+        //   while (j < red.length) {
+        //     red[j].removeAttribute('class')
+        //   }
+        updateList();
+        }
+
+      }
+      xhr.send(JSON.stringify({
+        title: title.value,
+        description: description.value,
+        icons: selections
+      }))
+      
+      selections = [];
+      // fetch(`${BPGRoutes}/options`, {
+      //   method: "POST",
+      //   headers: headers,
+      //   mode: 'cors',
+      //   body: JSON.stringify({
+      //     title: title.value,
+      //     description: description.value,
+      //     icons: selections
+      //   })
+      // }).then(function(res) {
+      //   var green = document.getElementById('greenOption').children;
+      //   var red = document.getElementById('redOption').children;
+      //   var i = 0;
+      //   var j = 0;
+      //
+      //   title.setAttribute('value', '');
+      //   description.setAttribute('value', '');
+      //   while (i < green.length) {
+      //     green[i].removeAttribute('class');
+      //   }
+      //   while (j < red.length) {
+      //     red[j].removeAttribute('class')
+      //   }
+      //
+      //   updateList();
+      // });
+    }
+
     function readFile(file, cb) {
       var reader = new FileReader();
 
@@ -163,29 +269,58 @@
       })
     }
 
+    function createImageLI(imageData) {
+      var list = list || images;
+      var imageListItem = document.createElement("li");
+      var titleSpan = document.createElement("span");
+      var imageSpan = document.createElement("span");
+      var titleContent = document.createTextNode(imageData.filename);
+      var imageContent = new Image(50, 50);
+
+      imageContent.src = `${s3BucketURL}/${imageData.filename}`;
+
+      imageListItem.setAttribute('id', imageData.id);
+      imageListItem.appendChild(titleSpan).appendChild(titleContent);
+      imageListItem.appendChild(imageSpan).appendChild(imageContent);
+
+      return imageListItem;
+    }
+
     function addToList(imageData) {
       var imageListItem = document.createElement("li");
       var titleSpan = document.createElement("span");
       var imageSpan = document.createElement("span");
-      var titleContent = document.createTextNode(imageData.name);
+      var titleContent = document.createTextNode(imageData.filename);
       var imageContent = new Image(50, 50);
 
-      imageContent.src = `${s3BucketURL}/${imageData.name}`;
+      imageContent.src = `${s3BucketURL}/${imageData.filename}`;
 
       imageListItem.appendChild(titleSpan).appendChild(titleContent);
       imageListItem.appendChild(imageSpan).appendChild(imageContent);
       imageListItem.appendChild(createForm(imageData));
 
-      images.appendChild(imageListItem);
+      list.appendChild(imageListItem);
     };
 
+    function updateList() {
+      options.forEach(function(option) {
+        var complete = document.getElementById(option);
+        if (complete) complete.remove();
+      })
+    }
+
     function getImages() {
-      fetch('https://qhmn4kkofl.execute-api.us-west-2.amazonaws.com/dev/hello', {
+      fetch(`${BPGRoutes}/image-data`, {
         method: 'GET',
         mode: 'cors'
       }).then(function(res) {
-        console.log("HELLO TEST: ", res);
-      })
+        return res.json();
+      }).then(function(data) {
+        data.forEach(function(imageData) {
+          createOptions(imageData);
+          // addToList(imageData);
+        });
+      });
     };
 
     function saveData(data, id) {
@@ -222,6 +357,22 @@
       }
       return id;
     }
+
+    function getOptions() {
+      fetch(`${BPGRoutes}/options`, {
+        method: 'GET',
+        mode: 'cors'
+      }).then(function(res) {
+        return res.json();
+      }).then(function(data) {
+        data.forEach(function(option) {
+          options = options.concat(option.icons);
+        })
+        updateList();
+      });
+    }
+
+    getOptions();
     getImages();
   </script>
 </body>

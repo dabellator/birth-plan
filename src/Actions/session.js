@@ -1,4 +1,5 @@
 import Api from '../Services/Api';
+import { createRandom } from '../Services/Common';
 
 const imageHost = 'https://s3-us-west-2.amazonaws.com/serverless-bpg-image-handler';
 
@@ -50,5 +51,12 @@ export function updateImageData(imageData) {
     Api.put(`imageData`, {...imageData}).then(res => {
       dispatch({type: 'IMAGE_DATA_UPDATED', body: res.body})
     })
+  }
+}
+
+export function saveForm(formData) {
+  formData.id = formData.id || createRandom();
+  return dispatch => {
+    Api.put(`plans/${formData.id`)
   }
 }

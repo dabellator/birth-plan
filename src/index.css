@@ -5,6 +5,11 @@
   display: flex;
   flex-wrap: wrap;
 }
+@media print {
+  .app-header-wrapper {
+    display: none;
+  }
+}
 .app-header-wrapper .header-section {
   align-self: center;
   color: #edfaf9;

@@ -1,10 +1,11 @@
 import EditPlan from '../Components/EditPlan';
 import { bindActionCreators } from 'redux';
-import { setSelection, updateForm } from '../Actions/session';
+import { setSelection, updateForm, saveForm } from '../Actions/session';
 import { connect } from 'react-redux';
 
 function mapStateToProps(state) {
   return {
+    id: state.session.id,
     images: state.session.images,
     selected: state.session.selected,
     name: state.session.name,
@@ -15,7 +16,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     setSelection,
-    updateForm
+    updateForm,
+    saveForm
   }, dispatch);
 };
 

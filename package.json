@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "amazon-cognito-identity-js": "^1.19.0",
     "autoprefixer": "7.1.2",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
@@ -100,6 +101,9 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "aws-sdk": "^2.97.0",
+    "serverless-dynamodb-local": "^0.2.24",
+    "serverless-offline": "^3.15.3",
     "stylus": "^0.54.5"
   }
 }
