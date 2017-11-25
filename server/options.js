@@ -1,4 +1,4 @@
-'use strict';
+
 
 const uuid = require('./uuid');
 const dynamodb = require('./dynamodb');
@@ -43,7 +43,7 @@ module.exports.create = (event, context, callback) => {
         "Content-Type": "application/json"
       }
     };
-    console.log(params, response);
+    
     callback(null, response);
   });
 };

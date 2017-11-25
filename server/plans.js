@@ -1,4 +1,4 @@
-'use strict';
+
 
 const uuid = require('./uuid');
 const dynamodb = require('./dynamodb');
@@ -72,10 +72,12 @@ module.exports.update = (event, context, callback) => {
       id: event.pathParameters.id,
     },
     ExpressionAttributeValues: {
-      ':selections': data.selections,
+      ':selected': data.selected,
       ':updatedAt': timestamp,
+      ':name': data.name,
+      ':description': data.description
     },
-    UpdateExpression: 'SET selections = :selections, updatedAt = :updatedAt',
+    UpdateExpression: 'SET selected = :selected, updatedAt = :updatedAt, name = :name, description = :description',
     ReturnValues: 'ALL_NEW',
   };
 
