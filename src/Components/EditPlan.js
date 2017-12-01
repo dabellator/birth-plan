@@ -14,7 +14,7 @@ export default class EditPlan extends Component {
   handleSave = () => {
     this.props.saveForm({
       id: this.props.id,
-      name: this.props.name,
+      parentName: this.props.name,
       description: this.props.description,
       selected: this.props.selected
     });

@@ -106,7 +106,7 @@ export default class TestingPage extends Component {
         placeholder: 'N/A'
       }
     ]
-    console.log("images? ", this.props.images)
+    
     return (
       <div style={{height: 'inherit'}} className="test-page-wrapper">
         {/* <div className="row">

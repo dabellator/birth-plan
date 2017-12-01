@@ -10,7 +10,6 @@ export default class Checkbox extends Component {
   }
 
   check() {
-    console.log("fired check")
     const { checked } = this.state;
     this.setState({ checked: !checked })
   }

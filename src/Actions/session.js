@@ -57,6 +57,8 @@ export function updateImageData(imageData) {
 export function saveForm(formData) {
   formData.id = formData.id || createRandom();
   return dispatch => {
-    Api.put(`plans/${formData.id`)
+    Api.put(`plans/${formData.id}`, formData).then(res => {
+      dispatch({type: 'PLAN_SAVED', res})
+    })
   }
 }

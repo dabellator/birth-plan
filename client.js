@@ -45,7 +45,6 @@
 
 	function previewPlan(selectedImages) {
 		selectedImages = selectedImages || document.querySelectorAll('[select]');
-		console.log(selectedImages);
 		// add name to page
 		var name = document.getElementById('name');
 		var selectedImageElement = document.getElementById('selectedImageElement');

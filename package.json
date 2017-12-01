@@ -104,6 +104,7 @@
     "aws-sdk": "^2.97.0",
     "serverless-dynamodb-local": "^0.2.24",
     "serverless-offline": "^3.15.3",
+    "serverless-single-page-app-plugin": "file:./server/serverless-single-page-app-plugin",
     "stylus": "^0.54.5"
   }
 }
